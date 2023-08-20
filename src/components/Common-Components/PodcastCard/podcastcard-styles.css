@@ -2,7 +2,7 @@
 
 
  .podcast-card {
-    width: 200px;
+    width: 190px;
     height: 200px;
     background: linear-gradient(177.7deg, 
       rgba(58, 129, 191, 0.3) 1.63%,
@@ -14,7 +14,7 @@
  }
 
  .dispaly-image-card {
-    width:200px;
+    width:190px;
     height: 180px;
     border:1.5rem;
  }

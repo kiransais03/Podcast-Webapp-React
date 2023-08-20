@@ -1,5 +1,5 @@
 .custom-input {
-    color: var(--white);;
+    color: var(--white);
     background-color: var(--theme);
     border: 2px solid var(--purple-grey);
     border-radius: 0.5rem;
@@ -13,4 +13,8 @@
 .custom-input:focus {
     outline: none;
     border-color: var(--white);
+}
+
+#fileinput-label {
+    color: orange;
 }

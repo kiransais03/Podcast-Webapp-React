@@ -86,8 +86,8 @@ const Createpodcastform = () => {
     <>
             <Input type="text" placeholder="Podcast Title" state={title} setState={setTitle} required={true}/>
             <Input type="text" placeholder="Podcast Description" state={desc} setState={setDesc} required={true}/>
-            <Fileinput imgname="Click To Upload Banner Image" accept="image/*" id="banner-img" filehandlingfunc={bannerimgupload}/>
-            <Fileinput imgname="Click To Upload Display Image" accept="image/*" id="display-img" filehandlingfunc={displayimgupload}/>
+            <Fileinput text="Click To Upload Banner Image" accept="image/*" id="banner-img" filehandlingfunc={bannerimgupload}/>
+            <Fileinput text="Click To Upload Display Image" accept="image/*" id="display-img" filehandlingfunc={displayimgupload}/>
             <Button text={loading ? "Loading...." :"Create Now"} onClick={handleCreatepodcast}/>
     </>
   )

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./fileinput-styles.css"
 
-const Fileinput = ({accept,id,filehandlingfunc,imgname}) => {
+const Fileinput = ({accept,id,filehandlingfunc,text}) => {
 
     let [filesSelected,setFilesSelected] = useState(false);
 
@@ -12,7 +12,7 @@ const Fileinput = ({accept,id,filehandlingfunc,imgname}) => {
     }
 
   return (<>
-    <label className='custom-input' htmlFor={id}>{filesSelected ? <span>{filesSelected} <button>Remove File</button></span>:imgname }</label>
+    <label className='custom-input' id="fileinput-label" htmlFor={id}>{filesSelected ? <span>{filesSelected} <button>Remove File</button></span>: text }</label>
     <input type="file" accept={accept} id={id} onChange={onChangefunc} style={{display:"none",}} disabled={filesSelected}/>
   </>
   )

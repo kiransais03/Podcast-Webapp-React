@@ -6,7 +6,7 @@ import { auth } from '../firebase';
 function Privateroutes() {
    let [user,loading,error]=useAuthState(auth);  //Without this hook also we know in what state the Authentication is in.
                                                      //This hook will make it easy to get those values in a single line.
-      let navigate=useNavigate();
+
    
     if(loading)
    {

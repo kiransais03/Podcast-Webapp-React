@@ -15,6 +15,8 @@ import { useDispatch } from 'react-redux';
 import {setUser} from "./slices/userSlices";
 import { doc } from "firebase/firestore"; 
 import Privateroutes from './components/Privateroutes';
+import Startapodcastpage from './pages/StartAPodcast-page/Startapodcastpage';
+import Podcastspage from './pages/Podcasts-page/Podcastspage';
 
 
 function App() {
@@ -36,10 +38,10 @@ function App() {
   //be logged in.
   
   useEffect(() => {   
-    const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
+    const unsubscribeAuth = onAuthStateChanged(auth, (user) => { //If any updates in Auth this function will be triggered
       if (user) {
         console.log(user,"this is the onAuthstatechange user data")
-        const unsubscribeSnapshot = onSnapshot(
+        const unsubscribeSnapshot = onSnapshot(   //If any updates in Firestore db of Authorization of particular account this function will be triggered
           doc(db, "users", user.uid),
           (userDoc) => {
             if (userDoc.exists()) {
@@ -59,13 +61,13 @@ function App() {
         );
   
         return () => {
-          unsubscribeSnapshot();
+          unsubscribeSnapshot();  //Cleanup function to the realtime Firestore db listener after the component unmounts.
         };
       }
     });
   
     return () => {
-      unsubscribeAuth();
+      unsubscribeAuth();  //Cleanup function to the realtime Auth listener after the component unmounts.
     };
   }, []);
   
@@ -77,8 +79,11 @@ function App() {
       <Routes>
         <Route path="/signup" element={<Signuppage/>}/>
         <Route path="/login" element={<Loginpage/>}/>
-       <Route element={<Privateroutes/>}> 
+       <Route element={<Privateroutes/>}>       
+                         {/*In private Route there is no "path" attribute*/}
              <Route path="/profile" element={<Profilepage/>}/>
+             <Route path="/start-a-podcast" element={<Startapodcastpage/>}/>
+             <Route path="/podcasts" element={<Podcastspage/>}/>
         </Route>
       </Routes>
     </div>

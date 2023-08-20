@@ -21,7 +21,7 @@ const Signupform =()=>{
     let [loading,setLoading] = useState(false);
 
     let dispatch=useDispatch();
-    let navigate1 = useNavigate()
+    let navigate1 = useNavigate();
 
     async function handleSingup() {
         if(fname && email && password && confirmpassword && email.includes('@') && password===confirmpassword && password.length>=6) {

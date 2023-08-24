@@ -24,7 +24,8 @@
 
 .gradient {
     position: absolute;
-    width: 800px;
+    min-width: 320px;
+    max-width: 800px;
     height: 150px;
     margin: auto;
     background-color:var(--blue);

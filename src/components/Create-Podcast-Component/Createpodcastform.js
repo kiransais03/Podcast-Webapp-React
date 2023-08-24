@@ -38,14 +38,14 @@ const Createpodcastform = () => {
     {
       try {
        setLoading(true);
-      const bannerimgRef = ref(storage, `podcastimages/${auth.currentUser.uid}/${bannerimg}${Date.now()})}`);
+      const bannerimgRef = ref(storage, `podcastimages/${auth.currentUser.uid}/${bannerimg[0].name}${Date.now()})}`);
      await uploadBytes(bannerimgRef, bannerimg[0]).then((snapshot) => {
         console.log('Uploaded Bannerimage');
       });
 
       const bannerimgUrl = await getDownloadURL(bannerimgRef);
 
-      const displayimgRef = ref(storage, `podcastimages/${auth.currentUser.uid}/${displayimg}${Date.now()})}`);
+      const displayimgRef = ref(storage, `podcastimages/${auth.currentUser.uid}/${displayimg[0].name}${Date.now()})}`);
       await uploadBytes(displayimgRef, displayimg[0]).then((snapshot) => {
         console.log('Uploaded Displayimage');
       });
@@ -58,6 +58,7 @@ const Createpodcastform = () => {
         description: desc,
         bannerimg:bannerimgUrl,
         displayimg:displayimgUrl,
+        createdBy :auth.currentUser.uid,
       });
       
       toast.success("Podcast Created");
@@ -88,7 +89,7 @@ const Createpodcastform = () => {
             <Input type="text" placeholder="Podcast Description" state={desc} setState={setDesc} required={true}/>
             <Fileinput text="Click To Upload Banner Image" accept="image/*" id="banner-img" filehandlingfunc={bannerimgupload}/>
             <Fileinput text="Click To Upload Display Image" accept="image/*" id="display-img" filehandlingfunc={displayimgupload}/>
-            <Button text={loading ? "Loading...." :"Create Now"} onClick={handleCreatepodcast}/>
+            <Button text={loading ? "Uploading Files...." :"Create Now"} onClick={handleCreatepodcast}/>
     </>
   )
 }

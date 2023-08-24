@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import "./fileinput-styles.css"
+import uploadimg from "../../../images/file-upload-svgrepo-com.svg"
 
 const Fileinput = ({accept,id,filehandlingfunc,text}) => {
 
@@ -11,8 +12,15 @@ const Fileinput = ({accept,id,filehandlingfunc,text}) => {
        filehandlingfunc(e.target.files);
     }
 
+
+    function removefileFunc(e) {
+      e.preventDefault();
+      filehandlingfunc("");
+      setFilesSelected(false)
+    }
+
   return (<>
-    <label className='custom-input' id="fileinput-label" htmlFor={id}>{filesSelected ? <span>{filesSelected} <button>Remove File</button></span>: text }</label>
+    <label className='custom-input' id="fileinput-label" htmlFor={id}>{filesSelected ? <span>{filesSelected} <button onClick={removefileFunc}>Remove File</button></span>:<> <img className="uploadicon" src={uploadimg} alt="upl"/> {text}</> }</label>
     <input type="file" accept={accept} id={id} onChange={onChangefunc} style={{display:"none",}} disabled={filesSelected}/>
   </>
   )

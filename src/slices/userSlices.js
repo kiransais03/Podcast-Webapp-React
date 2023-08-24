@@ -15,5 +15,5 @@ const userSlices =createSlice({
   }
 })
 
-export const {setUser,clearUser} =userSlices.actions;
+export const {setUser,clearUser} =userSlices.actions;  //Destructuring the "setUser,clearUser" function from "userSlices.actions" object
 export default userSlices.reducer;

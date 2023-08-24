@@ -17,4 +17,11 @@
 
 #fileinput-label {
     color: orange;
+    cursor: pointer;
+}
+
+
+.uploadicon {
+    width: 30px;
+    height: 30px;
 }

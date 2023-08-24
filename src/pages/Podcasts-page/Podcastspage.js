@@ -17,7 +17,7 @@ const Podcastspage = () => {
     let [search,setSearch] = useState("");
 
 useEffect(()=>{
-    console.log("runnign")
+    console.log("running")
 const unsubscribe = onSnapshot(query(collection(db, "podcasts")), (querySnapshot) => {   //If any updates in Firestore db in all total collection of files this function will be triggered
   const podcastsData = [];
   querySnapshot.forEach((doc) => {

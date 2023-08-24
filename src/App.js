@@ -11,17 +11,20 @@ import 'react-toastify/dist/ReactToastify.css';
 import { onAuthStateChanged } from 'firebase/auth';
 import { onSnapshot } from 'firebase/firestore';
 import {auth,db} from "./firebase"
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {setUser} from "./slices/userSlices";
 import { doc } from "firebase/firestore"; 
 import Privateroutes from './components/Privateroutes';
 import Startapodcastpage from './pages/StartAPodcast-page/Startapodcastpage';
 import Podcastspage from './pages/Podcasts-page/Podcastspage';
-
+import Podcastdetailspage from './pages/PocastDetails-page/Podcastdetailspage';
+import Createanepisodepage from './pages/CreateAnEpisode-page/Createanepisodepage';
 
 function App() {
 
   let dispatch=useDispatch();
+  let reduxdata=useSelector((state)=>{return state});
+  console.log(reduxdata,"Redux Data")
 
   //In this useEffect we are calling the "onAuthStateChanged" function.This will be triggered when there is 
   //any small change in the user login data.That means if the user Login,Logout,or Clicked on Login 
@@ -84,6 +87,8 @@ function App() {
              <Route path="/profile" element={<Profilepage/>}/>
              <Route path="/start-a-podcast" element={<Startapodcastpage/>}/>
              <Route path="/podcasts" element={<Podcastspage/>}/>
+             <Route path="/podcasts/:id" element={<Podcastdetailspage/>}/>
+             <Route path="/podcasts/:id/create-episode" element={<Createanepisodepage/>}/>
         </Route>
       </Routes>
     </div>

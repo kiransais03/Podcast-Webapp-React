@@ -11,7 +11,7 @@ const Signuppage = ()=>{
 
     return(<div>
         
-        <div className="input-wrapper">
+        <div className="input-wrapper-form">
             <h1>Signup</h1>
             <Signupform/>
             <p className="signup-page-redirect" onClick={()=>{navigate("/login")}}>Already have an Account?Click here to <span>LogIn.</span></p>

@@ -4,7 +4,7 @@ import Createpodcastform from '../../components/Create-Podcast-Component/Createp
 const Startapodcastpage=() =>{
   return (
     <div>
-      <div className="input-wrapper">
+      <div className="input-wrapper-form">
             <h1>Create A Podcast</h1>
             <Createpodcastform/>
         </div>

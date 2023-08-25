@@ -1,7 +1,7 @@
 .custom-audio-player {
     position: fixed;
     bottom: 0;
-    left: 0;
+    /* left: 0; */
     padding: 1rem 0;
     display: flex;
     justify-content: center;
@@ -9,6 +9,8 @@
     gap: 2rem;
     background-color: rgba(14,2,50,0.5);
     width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
 }
 
 .display-image-plr {
@@ -39,3 +41,14 @@
 .audio-btn {
     cursor: pointer;
 }
+
+.player-control-btns {
+    display: flex;
+    gap: 2rem;
+}
+
+@media screen and (min-width:200px) and (max-width:520px) {
+    .player-control-btns {
+        gap: 0.5rem;
+    }
+} 

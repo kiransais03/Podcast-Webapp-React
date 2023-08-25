@@ -16,10 +16,18 @@ const Podcastdetailspage = () => {
   const [currentpodcast,setCurrentpodcast] =useState("");
   let [episodesarr,setEpisodesarr] = useState([]);
   const [playingFile,setPlayingfile]=useState("");
+  const [currentplayfileindex,setCurrentplayfileindex] = useState("");
   
   let dispatch = useDispatch();
   let navigate = useNavigate();
 console.log(id,useParams());
+
+useEffect(()=>{
+  if(episodesarr) {
+  console.log("hhfehehrjh")
+ setPlayingfile(episodesarr[currentplayfileindex]?.episode?.audiofile);
+  }
+},[currentplayfileindex])
 
   useEffect(()=>{
     if(id)
@@ -96,12 +104,14 @@ console.log(currentpodcast,"current thing",episodesarr)
           <h1 className='currentpodcast-page-titles'>Episodes </h1>
           {episodesarr.length > 0 ? (<div style={{display:"flex",justifyContent:"space-between",alignItems:"center",width:"100%",margin:"1rem",marginTop:"0"}}>
             <ol>
-              {episodesarr.map((episode) => (
+              {episodesarr.map((episode,index) => (
                <li key={episode.id}> <Episodedetails
                   title={episode.title}
                   description={episode.description}
                   audiofile={episode.audiofile}
-                  onClick={(file) => {setPlayingfile(file);}}
+                  sendfile={(file)=>{ setPlayingfile(file); }}
+                  index={index}
+                  setCurrentplayfileindex={setCurrentplayfileindex}
                 /></li>
               ))}
             </ol></div>
@@ -111,7 +121,7 @@ console.log(currentpodcast,"current thing",episodesarr)
         </>
       )}
     </div>
-    <Audioplayer audioSrc={playingFile} image={currentpodcast.displayimg} />
+    <Audioplayer episodesarr={episodesarr} audioSrc={playingFile} image={currentpodcast.displayimg} currentplayfileindex={currentplayfileindex} setCurrentplayfileindex={setCurrentplayfileindex}/>
   </div>
   
   )

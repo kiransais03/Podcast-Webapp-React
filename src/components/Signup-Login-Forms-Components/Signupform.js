@@ -4,11 +4,13 @@ import Button from "../Common-Components/Button/Button";
 //Firebase Auththentication
 import {createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore"; 
-import {db,auth} from "../../firebase";
+import {db,auth,storage} from "../../firebase";
 import { useDispatch } from "react-redux";
 import {useNavigate} from "react-router-dom"
 import { setUser } from "../../slices/userSlices";
 import {toast} from "react-toastify";
+import Fileinput from "../Common-Components/Fileinput/Fileinput";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 
 const Signupform =()=>{
@@ -17,6 +19,7 @@ const Signupform =()=>{
     let [email,setEmail]=useState("");
     let [password,setPassword]=useState("");
     let [confirmpassword,setConfirmpassword]=useState("");
+    let [profilepic,setProfilepic] = useState("");
 
     let [loading,setLoading] = useState(false);
 
@@ -24,7 +27,7 @@ const Signupform =()=>{
     let navigate1 = useNavigate();
 
     async function handleSingup() {
-        if(fname && email && password && confirmpassword && email.includes('@') && password===confirmpassword && password.length>=6) {
+        if(fname && email && password && confirmpassword && email.includes('@') && password===confirmpassword && password.length>=6 && profilepic) {
             try {
             console.log("Signup in progress....");
 
@@ -36,11 +39,24 @@ const Signupform =()=>{
             password);
             const user=userCredential.user;
             console.log(user);
+          
+            //Upload the image to the Storage and get the link
+            const profilepicref = ref(storage, `userprofilepics/${auth.currentUser.uid}/${profilepic[0].name}${Date.now()})}`);
+
+           uploadBytes(profilepicref, profilepic).then((snapshot) => {
+             console.log('Uploaded profile picture');
+            });
+
+            const profilepicUrl = await getDownloadURL(profilepicref);
+
+
            //Add the account details to Firestore 
             await setDoc(doc(db, "users", user.uid), {  //"users" is the database name in Firestore
                 name: fname,
                 email:user.email,
                 uid:user.uid,
+                profilepic : profilepicUrl,
+                number:""
               });
  
                //Saving the data in redux store or we can also say as Calling the reducer 
@@ -48,6 +64,8 @@ const Signupform =()=>{
                 name:fname,
                 email:user.email,
                 uid : user.uid,
+                profilepic : profilepicUrl,
+                number:""
               }))
               setLoading(false);
               toast.success('Signup Successful');
@@ -64,7 +82,7 @@ const Signupform =()=>{
 }
 else {
     setLoading(false);
-    if(!fname || !email || !password || !confirmpassword)
+    if(!fname || !email || !password || !confirmpassword || !profilepic)
     {
         toast.error('All the fields are required!');
     }
@@ -86,6 +104,11 @@ else {
 }
 }
 
+    //Profile Picture selected - state update with file
+    function profilepicupload(files) {
+        setProfilepic(files);
+     }
+
 // const handleGoogleSignIn = async () => {
 //     try {
 //         var provider = new firebase.auth.GoogleAuthProvider();
@@ -101,6 +124,7 @@ else {
             <Input type="text" placeholder="Email" state={email} setState={setEmail} required={true}/>
             <Input type="password" placeholder="Password" state={password} setState={setPassword} required={true}/>
             <Input type="password" placeholder="Confirm Password" state={confirmpassword} setState={setConfirmpassword} required={true}/>
+            <Fileinput text="Click here to Upload Profile Picture" accept="image/*" id="profilepic" filehandlingfunc={profilepicupload}/>
             <Button text={loading ? "Loading...." :"Signup"} onClick={handleSingup}/>
             {/* <button onClick={handleGoogleSignIn}>Sign in with Google</button> */}
         </>

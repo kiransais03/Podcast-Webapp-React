@@ -29,3 +29,11 @@
 #episodes-div {
     text-align: left;
 }
+
+#createdbytag {
+    font-size:15px;
+    color:rgba(255, 255, 255, 0.5);
+    font-style: italic;
+    padding: 0.2rem;
+    margin: 0;
+}

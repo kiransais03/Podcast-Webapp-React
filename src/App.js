@@ -19,6 +19,7 @@ import Startapodcastpage from './pages/StartAPodcast-page/Startapodcastpage';
 import Podcastspage from './pages/Podcasts-page/Podcastspage';
 import Podcastdetailspage from './pages/PocastDetails-page/Podcastdetailspage';
 import Createanepisodepage from './pages/CreateAnEpisode-page/Createanepisodepage';
+import Forgotpassword from './pages/Forgotpassword-page/Forgotpassword-page';
 
 function App() {
 
@@ -82,6 +83,7 @@ function App() {
       <Routes>
         <Route path="/signup" element={<Signuppage/>}/>
         <Route path="/login" element={<Loginpage/>}/>
+        <Route path='/forgotpassword' element={<Forgotpassword/>}/>
        <Route element={<Privateroutes/>}>       
                          {/*In private Route there is no "path" attribute*/}
              <Route path="/profile" element={<Profilepage/>}/>

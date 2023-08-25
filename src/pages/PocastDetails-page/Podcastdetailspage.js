@@ -17,17 +17,15 @@ const Podcastdetailspage = () => {
   let [episodesarr,setEpisodesarr] = useState([]);
   const [playingFile,setPlayingfile]=useState("");
   const [currentplayfileindex,setCurrentplayfileindex] = useState("");
+
+  let [createdBy,setCreatedBy] = useState("");
+  
+  let currpodData="";
   
   let dispatch = useDispatch();
   let navigate = useNavigate();
-console.log(id,useParams());
+// console.log(id,useParams());
 
-useEffect(()=>{
-  if(episodesarr) {
-  console.log("hhfehehrjh")
- setPlayingfile(episodesarr[currentplayfileindex]?.episode?.audiofile);
-  }
-},[currentplayfileindex])
 
   useEffect(()=>{
     if(id)
@@ -43,6 +41,8 @@ useEffect(()=>{
   if(docSnap.exists()) {
     console.log("Document data:", docSnap.data());
     setCurrentpodcast({id:id,...docSnap.data()});
+    currpodData={id:id,...docSnap.data()};
+    getPodcastuserdetails();
    } else {
   // docSnap.data() will be undefined in this case
     toast.error("No such podcast found");
@@ -55,6 +55,8 @@ catch(error) {
   toast.error("Some error occurred:",error.message)
 }
 }
+
+
 
 useEffect(()=>{
   console.log("running")
@@ -79,7 +81,31 @@ console.log("Episodes updated successfully")
 },[id])
 
 
-console.log(currentpodcast,"current thing",episodesarr)
+useEffect(()=>{
+setPlayingfile(episodesarr[currentplayfileindex]?.audiofile)
+},[currentplayfileindex])
+
+
+// useEffect(()=>{
+//   getPodcastuserdetails();
+// },[])
+
+async function getPodcastuserdetails () {
+  console.log(currpodData,"Podcast data")
+   const docRef = doc(db, "users", currpodData?.createdBy);
+   const docSnap = await getDoc(docRef);
+   
+   if (docSnap.exists()) {
+     console.log("Document data:", docSnap.data());;
+     setCreatedBy(docSnap.data())
+   } else {
+     // docSnap.data() will be undefined in this case
+     console.log("No such document!");
+   }
+   }
+
+
+// console.log(currentpodcast,"current thing")
 
   return (
     <div>
@@ -88,13 +114,15 @@ console.log(currentpodcast,"current thing",episodesarr)
         <>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",width:"100%",margin:"1rem"}}>
             <h1 className='currentpodcast-page-titles'>{currentpodcast.title}</h1>
+
             {currentpodcast.createdBy===auth.currentUser.uid && (
               <Button
                 text="Create Episode"
                 onClick={() => {navigate(`/podcasts/${id}/create-episode`)}}
-                style={{margin:"0",width:"300px !important"}}
+                style={{margin:"0",width:"400px !important"}}
               />
             )}
+          <div id='createdbytag'>Created By {createdBy.name}({createdBy.email})</div>
           </div>
           <div className='current-podcast-bannerwrap'>
             <img src={currentpodcast.bannerimg} alt="banner"/>
@@ -121,6 +149,7 @@ console.log(currentpodcast,"current thing",episodesarr)
         </>
       )}
     </div>
+    <div style={{height:"72px"}}></div>
     <Audioplayer episodesarr={episodesarr} audioSrc={playingFile} image={currentpodcast.displayimg} currentplayfileindex={currentplayfileindex} setCurrentplayfileindex={setCurrentplayfileindex}/>
   </div>
   

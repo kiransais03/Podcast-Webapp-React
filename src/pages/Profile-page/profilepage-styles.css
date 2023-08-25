@@ -1,0 +1,36 @@
+.profilebtns {
+    height: 32px;
+    background-color: rgb(32,6,46);
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.profilebtns:hover {
+    background-color: goldenrod;
+    cursor: pointer;
+}
+
+.profile-input-div {
+    display: flex;
+  justify-content: flex-start;
+  align-items:center;
+}
+
+.profile-input-div input {
+    width: 40%
+}
+
+.logout-btn {
+    display: flex;
+    justify-content: center;
+    width: 20%;
+}
+
+.profile-form {
+    margin: 0.1rem;
+}
+
+.head-data {
+    margin: 2rem;
+}

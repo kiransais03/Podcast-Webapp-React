@@ -80,7 +80,7 @@ function Audioplayer  ({audioSrc,image,currentplayfileindex,setCurrentplayfilein
    }
 
 useEffect(()=>{
-  console.log(audioSrc,"Chrkc this oyut kfsadjfjsdaljfljsdaflkjlsajf");
+  console.log(audioSrc,"Audio file updated,playing",currentplayfileindex,"Current index");
   if(audioSrc) {
     if(isPlaying)
     {
@@ -132,20 +132,25 @@ useEffect(()=>{
 
   const nextsong = ()=>{
     console.log(currentplayfileindex,"56 hello")
-    if(currentplayfileindex>=episodesarr.length) {
+    if(currentplayfileindex<episodesarr.length-1) {
     setCurrentplayfileindex(currentplayfileindex+1);
     }
   }
 
   return (
     <div className='custom-audio-player'>
+     {console.log(episodesarr[currentplayfileindex],"Current file")}
+      <div className='episodename'>
+          {episodesarr[currentplayfileindex]?.title}
+      </div>
+      <div className='wrap-div'>
       <div className='player-control-btns'>
         <img src={image} alt='thumbnail'className='display-image-plr'/>
         <audio ref={audioRef} src={audioSrc}/>      {/*By using "useRef" hook we are taking the reference of the element  */}
                                                 {/* And by using this we easily access the element for our manipulations */}
-        <p className='audio-btn' onClick={prevsong}><RxTrackPrevious/></p>                                        
+        <p className='audio-btn trackbtn' onClick={prevsong}><RxTrackPrevious/></p>                                        
         <p className='audio-btn' onClick={togglePlay}>{isPlaying ? <FaPause/> : <FaPlay/>}</p>
-        <p className='audio-btn' onClick={nextsong}><RxTrackNext/></p>
+        <p className='audio-btn trackbtn' onClick={nextsong}><RxTrackNext/></p>
         </div>
         <div className='duration-flex'>
             <p>{formatTime(currentTime)}</p>
@@ -153,6 +158,7 @@ useEffect(()=>{
             <p>-{formatTime(duration-currentTime)}</p>
             <p className='audio-btn' onClick={toggleMute}>{!isMute?<FaVolumeUp/> : <FaVolumeMute/> }</p>
             <input type='range' min={0} max={1} step={0.01} onChange={handleVolume} className='volume-range'/>
+        </div>
         </div>
     </div>
   )

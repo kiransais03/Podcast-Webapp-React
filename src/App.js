@@ -21,6 +21,7 @@ import Podcastdetailspage from './pages/PocastDetails-page/Podcastdetailspage';
 import Createanepisodepage from './pages/CreateAnEpisode-page/Createanepisodepage';
 import Forgotpassword from './pages/Forgotpassword-page/Forgotpassword-page';
 import Podcastsdisplay from './components/Podcasts-Display/Podcastsdisplay';
+import Landingpage from './pages/Landingpage/Landingpage';
 
 function App() {
 
@@ -82,6 +83,7 @@ function App() {
     <Header/>
       <ToastContainer/>
       <Routes>
+        <Route path='' element={<Landingpage/>}/>
         <Route path="/signup" element={<Signuppage/>}/>
         <Route path="/login" element={<Loginpage/>}/>
         <Route path='/forgotpassword' element={<Forgotpassword/>}/>

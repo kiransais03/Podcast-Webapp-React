@@ -10,6 +10,9 @@
     justify-content: center;
     align-items: center;
     gap: 1.25rem;
+    overflow: hidden;
+    width: 100%;
+    max-width: 90vw;
 }
 
 .links a{

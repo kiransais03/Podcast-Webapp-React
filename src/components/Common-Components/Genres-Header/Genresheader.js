@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Header/Header'
+import '../Header/header-styles.css'
 import { Link, useLocation } from 'react-router-dom';
 
 function Genresheader() {

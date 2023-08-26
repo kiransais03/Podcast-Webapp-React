@@ -1,0 +1,25 @@
+
+  .App-header {
+    background-color: #0c224d;
+    padding: 20px;
+    color: white;
+    position: absolute;
+    z-index: 2;
+    bottom: 0;
+    text-align: center;
+    border-radius: 15px;
+  }
+
+  
+.landdiv {
+  /* width: 100%; */
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 1600px;
+}
+
+div img {
+  width: 100%;
+}

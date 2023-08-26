@@ -1,20 +1,23 @@
-import React, { useEffect,useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import {onSnapshot } from "firebase/firestore";
 import { collection, query } from "firebase/firestore";
 import { useDispatch, useSelector } from 'react-redux';
 import {setPodcasts} from "../../slices/podcastSlices"
 import { toast } from 'react-toastify';
 import {db} from "../../firebase"
-import Podcastcard from "../../components/Common-Components/PodcastCard/Podcastcard";
 import "./podcastpage-styles.css"
 import Input from '../../components/Common-Components/Input/Input';
+import Genresheader from '../../components/Common-Components/Genres-Header/Genresheader';
+import { Outlet } from 'react-router-dom';
+import Searchcontext from '../../Context/Searchcontext';
 
 const Podcastspage = () => {
 
+    let obj1 = useContext(Searchcontext);
     const dispatch = useDispatch();
     const podcasts = useSelector((state)=>{return state.podcasts.podcastsarr});
     console.log(podcasts)
-    let [search,setSearch] = useState("");
+    // let [search,setSearch] = useState("");
 
 useEffect(()=>{
     console.log("running")
@@ -37,18 +40,16 @@ const unsubscribe = onSnapshot(query(collection(db, "podcasts")), (querySnapshot
 }
 },[dispatch])
  
-let filterPodcasts = podcasts.filter((item)=>{return (item.title.trim().toLowerCase().includes(search.trim().toLowerCase()) )})
+// let filterPodcasts = podcasts.filter((item)=>{return (item.title.trim().toLowerCase().includes(search.trim().toLowerCase()) )})
 
   return (
     <div>
       <div className="input-wrapper">
             <h1 id="discover-podcasts-h1">Discover Podcasts</h1>
-            <Input type="search" placeholder="Search by title of podcast" state={search} setState={setSearch} required={false}/>
-            <div className="podcast-cards-div">
-            {filterPodcasts.length>0 ? filterPodcasts.map((item)=>{ return <Podcastcard key={item.id} id={item.id} title={item.title} displayimg={item.displayimg}/> })
-             : <p>No Podcasts Found</p>}
-            </div>
-            
+            <Input type="search" placeholder="Search by title of podcast" state={obj1.search} setState={obj1.setSearch} required={false}/>
+              <Genresheader/>
+           {/* <Podcastsdisplay podcastsarr={podcasts} search={search}/> */}
+           <Outlet/>
         </div>
     </div>
   )

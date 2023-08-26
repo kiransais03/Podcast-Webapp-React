@@ -1,6 +1,6 @@
 
 import './App.css';
-import React,{useEffect, useState} from 'react';
+import React,{useEffect} from 'react';
 import {Routes,Route} from "react-router-dom";
 import Signuppage from './pages/Signup-page/Signuppage';
 import Loginpage from './pages/Login-page/Loginpage';
@@ -20,6 +20,7 @@ import Podcastspage from './pages/Podcasts-page/Podcastspage';
 import Podcastdetailspage from './pages/PocastDetails-page/Podcastdetailspage';
 import Createanepisodepage from './pages/CreateAnEpisode-page/Createanepisodepage';
 import Forgotpassword from './pages/Forgotpassword-page/Forgotpassword-page';
+import Podcastsdisplay from './components/Podcasts-Display/Podcastsdisplay';
 
 function App() {
 
@@ -88,7 +89,17 @@ function App() {
                          {/*In private Route there is no "path" attribute*/}
              <Route path="/profile" element={<Profilepage/>}/>
              <Route path="/start-a-podcast" element={<Startapodcastpage/>}/>
-             <Route path="/podcasts" element={<Podcastspage/>}/>
+
+             <Route path="/podcasts" element={<Podcastspage/>}>
+               <Route path='' element={<Podcastsdisplay/>}/>
+               <Route path='crime' element={<Podcastsdisplay/>}/>
+               <Route path='drama' element={<Podcastsdisplay/>}/>
+               <Route path='history' element={<Podcastsdisplay/>}/>
+               <Route path='news' element={<Podcastsdisplay/>}/>
+               <Route path='politics' element={<Podcastsdisplay/>}/>
+               <Route path='culture' element={<Podcastsdisplay/>}/>
+               <Route path='lifestories' element={<Podcastsdisplay/>}/>
+              </Route>
              <Route path="/podcasts/:id" element={<Podcastdetailspage/>}/>
              <Route path="/podcasts/:id/create-episode" element={<Createanepisodepage/>}/>
         </Route>

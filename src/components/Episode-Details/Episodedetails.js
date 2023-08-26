@@ -13,7 +13,7 @@ const clickfunction = ()=>{
     <div style={{width:"100%"}}>
       <h1 style={{textAlign:"left",marginBottom:"0",fontSize:"16px"}}>{title}</h1>
       <p style={{marginLeft:"1rem"}} className='episode-description'>{description}</p>
-      <Button text={"Play"} onClick={clickfunction} />
+      <Button text={"Play"} width={"150px"} onClick={clickfunction} />
     </div>
   )
 }

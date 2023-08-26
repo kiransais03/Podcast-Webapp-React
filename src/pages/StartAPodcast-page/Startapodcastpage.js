@@ -6,7 +6,7 @@ const Startapodcastpage=() =>{
     <div>
       <div className="input-wrapper-form">
             <h1>Create A Podcast</h1>
-            <Createpodcastform/>
+          <Createpodcastform/>
         </div>
     </div>
   )

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+
 import {useAuthState} from "react-firebase-hooks/auth";  //This is the hook from react-firebase npm
-import { Navigate, Outlet, useNavigate } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import { auth } from '../firebase';
 import { toast } from 'react-toastify';
 

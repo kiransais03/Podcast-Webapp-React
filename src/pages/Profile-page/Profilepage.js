@@ -11,7 +11,6 @@ import { doc, updateDoc } from "firebase/firestore";
 import {VscAccount} from "react-icons/vsc";
 import { updatePassword } from "firebase/auth";
 import { setUser } from '../../slices/userSlices';
-import {sendPasswordResetEmail } from "firebase/auth";
 
 
 function Profilepage() {

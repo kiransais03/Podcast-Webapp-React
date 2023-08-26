@@ -2,9 +2,9 @@ import React from 'react';
 import "../Button/button-styles.css";
 
 
-function Button({onClick,text}) {
+function Button({onClick,text,width}) {
   return (
-    <div style={{width:"150px",}} onClick={onClick} className='custom-btn'>{text}</div>
+    <div style={width?{width:width}:{}}  onClick={onClick} className='custom-btn'>{text}</div>
   )
 }
 

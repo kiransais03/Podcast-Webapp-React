@@ -12,18 +12,6 @@ const Loginpage =()=>{
 
     let navigate=useNavigate();
 
-    async  function forgotpassword () {
-        sendPasswordResetEmail(auth, )
-    .then(() => {
-      toast.success("done")
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      toast.error(errorCode,errorMessage);
-      // ..
-    });
-      }
 
     return(<div>
         <div className="input-wrapper-form">

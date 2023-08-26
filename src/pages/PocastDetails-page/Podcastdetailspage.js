@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import Episodedetails from '../../components/Episode-Details/Episodedetails';
 import { setPodcasts } from '../../slices/podcastSlices';
 import Audioplayer from '../../components/AudioPlayer/Audioplayer';
+import Genretag from '../../components/Common-Components/Genretag/Genretag';
 
 const Podcastdetailspage = () => {
 
@@ -105,7 +106,7 @@ async function getPodcastuserdetails () {
    }
 
 
-// console.log(currentpodcast,"current thing")
+console.log(createdBy,"current thing")
 
   return (
     <div>
@@ -123,6 +124,9 @@ async function getPodcastuserdetails () {
               />
             )}
           <div id='createdbytag'>Created By {createdBy.name}({createdBy.email})</div>
+          </div>
+          <div style={{width:"100%"}}>
+          <Genretag text={currentpodcast.genre}/>
           </div>
           <div className='current-podcast-bannerwrap'>
             <img src={currentpodcast.bannerimg} alt="banner"/>

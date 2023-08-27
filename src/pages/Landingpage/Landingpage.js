@@ -1,16 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import img1 from "../../images/z42trjol.png"
 import "./landingpage-styles.css"
 import { useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../../firebase';
+import { toast } from 'react-toastify';
 
+let ct;
 function Landingpage() {
   let [user,loading,error]=useAuthState(auth);
 
+  useEffect(()=>{
+    ct=0;
+  },[])
+  
   let navigate = useNavigate();
-  if(user)
+  if(ct===0 && user)
   {
+    toast.success("Login Success")
+    ct++;
     navigate("/podcasts")
   }
 

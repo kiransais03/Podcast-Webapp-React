@@ -20,7 +20,7 @@ const Fileinput = ({accept,id,filehandlingfunc,text}) => {
     }
 
   return (<>
-    <label className='custom-input' id="fileinput-label" htmlFor={id}>{filesSelected ? <span>{filesSelected} <button onClick={removefileFunc}>Remove File</button></span>:<> <img className="uploadicon" src={uploadimg} alt="upl"/> {text}</> }</label>
+    <label className='custom-input fileinput-label' htmlFor={id}>{filesSelected ? <span>{filesSelected} <button onClick={removefileFunc}>Remove File</button></span>:<> <img className="uploadicon" src={uploadimg} alt="upl"/> {text}</> }</label>
     <input type="file" accept={accept} id={id} onChange={onChangefunc} style={{display:"none",}} disabled={filesSelected}/>
   </>
   )

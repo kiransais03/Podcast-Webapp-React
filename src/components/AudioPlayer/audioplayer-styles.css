@@ -17,7 +17,8 @@
 .wrap-div {
 display: flex;
 gap:2rem;
-align-content: center;
+align-items: center;
+justify-content: center;
 }
 
 
@@ -34,7 +35,7 @@ align-content: center;
 
 .duration-flex {
     display: flex;
-    justify-content: flex-start;
+    /* justify-content: flex-start; */
     align-items: center;
     gap:0.5rem;
     width: 50%;
@@ -52,6 +53,7 @@ align-content: center;
 
 .player-control-btns {
     display: flex;
+    align-items: center;
     gap: 2rem;
 }
 
@@ -62,9 +64,16 @@ align-content: center;
 
 
 
-@media screen and (min-width:200px) and (max-width:520px) {
+@media screen and (min-width:200px) and (max-width:720px) {
     .player-control-btns {
         gap: 0.5rem;
+    }
+    .wrap-div {
+        gap: 0.1rem;
+    }
+
+    .volume-range {
+        display: none;
     }
 } 
 

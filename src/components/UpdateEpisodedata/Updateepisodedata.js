@@ -6,42 +6,42 @@ import { toast } from 'react-toastify';
 import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
 import { auth, db, storage } from '../../firebase';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import Button from '../Common-Components/Button/Button';
 
-function Updateepisodedata({currentpodcast,setDummystate}) {
-    //Edit Podcast Data Functions
+let ct=0;
 
-    //EditPodcast menu data states
-    console.log(currentpodcast,"from update podcast")
+function Updateepisodedata({title,description,audiofile,episodeid,setDummystate,currentpodcast,index}) {
+
+    //Edit Episode menu data states
     const [titleedit,setTitleedit]=useState("");
     const [descedit,setDescedit]=useState("");
-    const [genreedit,setGenreedit]=useState("");
-    const [banneredit,setBanneredit]=useState("");
-    const [displayedit,setDisplayedit]=useState("");
+    const [audiofileedit,setAudiofileedit]=useState("");
 
     const [loading,setLoading] = useState(false);
     console.log(titleedit,"this is the useState titile")
 
     useEffect(()=>{
-        if (currentpodcast) {
-            setTitleedit(currentpodcast.title);
-            setDescedit(currentpodcast.description);
-            setGenreedit(currentpodcast.genre);
+        if (title && description) {
+            setTitleedit(title);
+            setDescedit(description);
         }
-    },[currentpodcast])
+    },[title,description])
   
 
-  async function handlePodcastedit() {
-    if(titleedit && descedit && genreedit) {
+  async function handleEpisodeeditfunc() {
+    if(titleedit && descedit) {
       try{
-        const podcastdetailsref = doc(db, "podcasts", currentpodcast.id); //"users" is the db name in firestore and userUid file name
+        const episodedetailsref = doc(db, "podcasts", currentpodcast.id,"episodes",episodeid); //"episode" is the collection name in firestore and userUid file name
     
-        await updateDoc(podcastdetailsref, {
-          description:descedit,
-          genre:genreedit,
-          title:titleedit,
+        await updateDoc(episodedetailsref, {
+          episodeData : {
+             description:descedit,
+             title:titleedit,
+             audiofile:audiofile,
+          }
         });
        
-        toast.success("Podcast data updated successfully")
+        toast.success("Episode data updated successfully")
         setDummystate("dummycallfor-re-render");
     
       }
@@ -55,41 +55,44 @@ function Updateepisodedata({currentpodcast,setDummystate}) {
     }
     }
 
-    function bannerimguploadeditfunc(files) {
-      setBanneredit(files);
-   }
 
-   //Display Image selected - state update with file
-   function displayimguploadeditfunc(files) {
-      setDisplayedit(files);
+   //Audio File selected - state update with file
+   function audiofileupload(files) {
+      setAudiofileedit(files);
    }
 
 
-//Banner image upload
-    async function handlebannerimgupdate() {
-        if( banneredit)
+//Audio upload
+    async function handleAudiouploadfunc() {
+        if(audiofileedit)
     {
       try {
        setLoading(true);
-      const bannerimgRef = ref(storage, `podcastimages/${auth.currentUser.uid}/${banneredit[0].name}${Date.now()})}`);
-     await uploadBytes(bannerimgRef, banneredit[0]).then((snapshot) => {
-        console.log('Uploaded Bannerimage');
+       const episodeaudioref = ref(storage, `podcastaudiofiles/${auth.currentUser.uid}/${audiofileedit[0].name}${Date.now()})}`);
+     await uploadBytes(episodeaudioref, audiofileedit[0]).then((snapshot) => {
+        console.log('Uploaded Audiofile');
       });
 
-      const bannerimgUrl = await getDownloadURL(bannerimgRef);
+      const episodeaudioUrl = await getDownloadURL(episodeaudioref);
+      console.log(episodeaudioUrl,"Audio url")
 
     //   toast.success("File Uploaded successfully");
 
 
-      const podcastdetailsref = doc(db, "podcasts", currentpodcast.id); //"users" is the db name in firestore and userUid file name
+    const episodeaudiodatasave = doc(db, "podcasts", currentpodcast.id,"episodes",episodeid); //"episode" is the collection name in firestore and userUid file name
     
-        await updateDoc(podcastdetailsref, {
-            bannerimg:bannerimgUrl,
-        });
-       
+    await updateDoc(episodeaudiodatasave, {
+      episodeData : {
+         description:descedit,
+         title:titleedit,
+         audiofile:episodeaudioUrl,
+      }
+    });
+       console.log(episodeaudioUrl,"Again url")
       
-      toast.success("Display Image Uploaded Successfully");
+      toast.success("Audio File Uploaded Successfully");
       setLoading(false);
+      setAudiofileedit("");
       setDummystate("dummycallfor-re-render")
       
     }
@@ -101,78 +104,35 @@ function Updateepisodedata({currentpodcast,setDummystate}) {
     }
     else {
       
-       if(!banneredit)
+       if(!audiofileedit)
       {
-        toast.error("Please select image")
+        toast.error("Please select audio file")
       }
 
     }
 }
 
-//Display image upload
-    async function handledisplayimgupdate() {
-  
-        if(displayedit)
-        {
-          try {
-           setLoading(true);
-    
-          const displayimgRef = ref(storage, `podcastimages/${auth.currentUser.uid}/${displayedit[0].name}${Date.now()})}`);
-          await uploadBytes(displayimgRef, displayedit[0]).then((snapshot) => {
-            console.log('Uploaded Display image');
-          });
-    
-          const displayimgUrl = await getDownloadURL(displayimgRef);
-    
-    
-          const podcastdetailsref = doc(db, "podcasts", currentpodcast.id); //"users" is the db name in firestore and userUid file name
-        
-            await updateDoc(podcastdetailsref, {
-                displayimg:displayimgUrl,
-            });
-           
-          
-          toast.success("Display Image Uploaded Successfully");
-          setLoading(false);
-          setDummystate("dummycallfor-re-render");
-          
-        }
-        catch(error) {
-          console.log(error);
-          toast.error("Some error occurred :",error.message);
-          setLoading(false);
-        }
-        }
-        else {
-          
-           if(!displayedit)
-          {
-            toast.error("Please select image")
-          }
-    
-        }
-
-    }
 
   return (
 
-<div className="offcanvas offcanvas-end" data-bs-backdrop="static" tabIndex="-1" id="staticBackdrop2" data-bs-theme="dark" aria-labelledby="staticBackdropLabel">
+<div className="offcanvas offcanvas-end" data-bs-backdrop="static" tabIndex="-1" id={`${episodeid}b`} data-bs-theme="dark" aria-labelledby={`${episodeid}b`}>
   <div className="offcanvas-header">
-    <h5 className="offcanvas-title" id="staticBackdropLabel">Edit Podcast:{currentpodcast.title} </h5>
+    <h5 className="offcanvas-title" id="staticBackdropLabel">Edit Podcast:{title} </h5>
     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div className="offcanvas-body">
     <Input type={"text"} placeholder={"Title"} state={titleedit} setState={setTitleedit} /> <br/>
     <Input type={"text"} placeholder={"Description"} state={descedit} setState={setDescedit} />
-     <ControllableStates setGenre={setGenreedit}/>
-     <div style={{marginLeft:"15px"}}>Genre - {genreedit}</div>
     <div className="d-grid gap-2 col-6 mx-auto" style={{margin:"25px 0"}}>
-         <button className="btn btn-primary" type="button" onClick={handlePodcastedit}>Update Data</button>
+         <button className="btn btn-primary" type="button" onClick={handleEpisodeeditfunc}>Update Data</button>
     </div>
-    <Fileinput text="Click To Select New Banner Image" accept="image/*" id="banner-img" filehandlingfunc={bannerimguploadeditfunc}/>
-    <button className='profilebtns btn btn-primary' onClick={handlebannerimgupdate}>Update Banner Image</button>
-    <Fileinput text="Click To Select New Display Image" accept="image/*" id="display-img" filehandlingfunc={displayimguploadeditfunc}/>
-    <button className='profilebtns btn btn-primary' onClick={handledisplayimgupdate}>Update Display Image</button>
+    <Fileinput text="Click To Upload Audio File" accept="audio/*" id={index} filehandlingfunc={audiofileupload}/>
+        <Button text={loading ?<div><div class="spinner-border spinner-border-sm" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div class="spinner-grow spinner-grow-sm" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div></div>:"Create Episode"} onClick={handleAudiouploadfunc}/>
   </div>
 </div>
   )

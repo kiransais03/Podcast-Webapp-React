@@ -158,7 +158,7 @@ function Updatepodcastdata({currentpodcast,setDummystate}) {
 
 <div className="offcanvas offcanvas-start" data-bs-backdrop="static" tabIndex="-1" id="staticBackdrop1" data-bs-theme="dark" aria-labelledby="staticBackdropLabel">
   <div className="offcanvas-header">
-    <h5 className="offcanvas-title" id="staticBackdropLabel">Edit Podcast:</h5>
+    <h5 className="offcanvas-title" id="staticBackdropLabel">Edit Podcast:{currentpodcast.title}</h5>
     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div className="offcanvas-body">

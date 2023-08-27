@@ -144,9 +144,9 @@ console.log(createdBy,"current user")
           <p className='currentpodcast-description'>{currentpodcast.description}</p>
   
           <h1 className='currentpodcast-page-titles'>Episodes </h1>
-          <button style={{width:"100%",maxWidth:"200px"}} className="btn btn-outline-warning" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop2" aria-controls="staticBackdrop2">
+          {/* <button style={{width:"100%",maxWidth:"200px"}} className="btn btn-outline-warning" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop2" aria-controls="staticBackdrop2 ">
                    Edit Episodes
-          </button>
+          </button> */}
           {episodesarr.length > 0 ? (<div style={{display:"flex",justifyContent:"space-between",alignItems:"center",width:"100%",margin:"1rem",marginTop:"0"}}>
             <ol>
               {episodesarr.map((episode,index) => (
@@ -157,6 +157,9 @@ console.log(createdBy,"current user")
                   sendfile={(file)=>{ setPlayingfile(file); }}
                   index={index}
                   setCurrentplayfileindex={setCurrentplayfileindex}
+                  setDummystate={setDummystate}
+                  currentpodcast={currentpodcast}
+                  episodeid={episode.id}
                 /></li>
               ))}
             </ol></div>
@@ -172,7 +175,7 @@ console.log(createdBy,"current user")
  {/* //Offcanvas for Edit of Podcast */}
   
   <Updatepodcastdata currentpodcast={currentpodcast} setDummystate={setDummystate}/>
-  <Updateepisodedata currentpodcast={currentpodcast} setDummystate={setDummystate}/>
+  
   </div>
   
   )

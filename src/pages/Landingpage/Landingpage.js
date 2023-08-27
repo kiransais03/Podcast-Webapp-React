@@ -2,10 +2,17 @@ import React from 'react'
 import img1 from "../../images/z42trjol.png"
 import "./landingpage-styles.css"
 import { useNavigate } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../../firebase';
 
 function Landingpage() {
+  let [user,loading,error]=useAuthState(auth);
 
   let navigate = useNavigate();
+  if(user)
+  {
+    navigate("/podcasts")
+  }
 
   return (
     <div className="landdiv">

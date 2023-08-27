@@ -19,7 +19,7 @@ export default function ControllableStates({setGenre}) {
 
         id="controllable-states-demo"
         options={options}
-        sx={{ minWidth: 30,height:45,backgroundColor:"coral",color:"white",border:"2px solid grey",borderRadius:"5px" }}
+        sx={{ minWidth: 30,height:45,marginLeft:"10px",backgroundColor:"rgb(239,243,246)",color:"white",border:"2px solid grey",borderRadius:"5px" }}
         renderInput={(params) => <TextField   {...params} label="Genre" />}
       />
     </div>

@@ -4,21 +4,32 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { auth } from '../firebase';
 import { toast } from 'react-toastify';
 import "./Loader/loaderstyles.css"
+import { useEffect, useState } from "react";
 
+
+let ct;
 function Privaterouteslogin() {
 
   let [user,loading,error]=useAuthState(auth);  //Without this react-hook also we can know in what state the Authentication is in.
                                                     //This hook will make it easy to get those values in a single line.
-   
-    if(loading)
-   {
-    return (<div><span class="loader"></span></div>)
-   }
+  
+  const [showToast, setShowToast] = useState(true);
+ 
+  useEffect(()=>{ct=0;},[])
+
+  if(loading)
+  {
+   return (<div><span class="loader"></span></div>)
+  }
    else if(error || user)
    {
-        // toast.error("Please Logout to Signin with different account");
+    if (showToast && ct===0) {
+        toast.info("Please Logout if you want to Signin with different account");
         // alert("Please Logout to Signin with different account")
         console.log(user,loading,error,"checking")
+        setShowToast(false);
+        ct++;
+    }
      
     return (
     <Navigate to="/profile" replace/>  )

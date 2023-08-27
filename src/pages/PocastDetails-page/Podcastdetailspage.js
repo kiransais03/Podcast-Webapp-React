@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';  // useParams() hook from react-router-dom to get the url(here Id) what is currenytly opened.
-import { collection, doc, getDoc, onSnapshot, query } from "firebase/firestore";
+import { collection, doc, getDoc, onSnapshot, query, updateDoc } from "firebase/firestore";
 import {auth, db} from "../../firebase";
 import { toast } from 'react-toastify';
 import Button from "../../components/Common-Components/Button/Button";
@@ -10,6 +10,8 @@ import Episodedetails from '../../components/Episode-Details/Episodedetails';
 import { setPodcasts } from '../../slices/podcastSlices';
 import Audioplayer from '../../components/AudioPlayer/Audioplayer';
 import Genretag from '../../components/Common-Components/Genretag/Genretag';
+import Updatepodcastdata from '../../components/Updatepodcastdata/Updatepodcastdata';
+import Updateepisodedata from '../../components/UpdateEpisodedata/Updateepisodedata';
 
 const Podcastdetailspage = () => {
 
@@ -18,6 +20,8 @@ const Podcastdetailspage = () => {
   let [episodesarr,setEpisodesarr] = useState([]);
   const [playingFile,setPlayingfile]=useState("");
   const [currentplayfileindex,setCurrentplayfileindex] = useState("");
+
+  const [dummystate,setDummystate]=useState("") //Dummy state just for rendering after updating the podcast data in another component
 
   let [createdBy,setCreatedBy] = useState("");
   
@@ -33,9 +37,10 @@ const Podcastdetailspage = () => {
     {
       getData1();
     }
-  },[id])
+  },[id,dummystate])
 
   async function getData1 () {  // To get the selected podcast details we are getting from the Firebase using ID of the file .
+    console.log("getdata1 called")
     try {
       console.log("object")
   const docSnap = await getDoc(doc(db, "podcasts", id));
@@ -106,22 +111,27 @@ async function getPodcastuserdetails () {
    }
 
 
-console.log(createdBy,"current thing")
+console.log(createdBy,"current user")
 
   return (
     <div>
     <div className='input-wrapper'>
       {currentpodcast.id && (
         <>
-          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",width:"100%",margin:"1rem"}}>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",width:"100%",margin:"1rem"}}>
             <h1 className='currentpodcast-page-titles'>{currentpodcast.title}</h1>
-
+            
             {currentpodcast.createdBy===auth.currentUser.uid && (
+              <>
+                 <button style={{margin:"1rem"}} className="btn btn-outline-warning" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop1" aria-controls="staticBackdrop1">
+                     Edit Podcast
+                   </button>
               <Button
                 text="Create Episode"
                 onClick={() => {navigate(`/podcasts/${id}/create-episode`)}}
                 style={{margin:"0",width:"400px !important"}}
               />
+              </>
             )}
           <div id='createdbytag'>Created By {createdBy.name}({createdBy.email})</div>
           </div>
@@ -134,6 +144,9 @@ console.log(createdBy,"current thing")
           <p className='currentpodcast-description'>{currentpodcast.description}</p>
   
           <h1 className='currentpodcast-page-titles'>Episodes </h1>
+          <button style={{width:"100%",maxWidth:"200px"}} className="btn btn-outline-warning" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop2" aria-controls="staticBackdrop2">
+                   Edit Episodes
+          </button>
           {episodesarr.length > 0 ? (<div style={{display:"flex",justifyContent:"space-between",alignItems:"center",width:"100%",margin:"1rem",marginTop:"0"}}>
             <ol>
               {episodesarr.map((episode,index) => (
@@ -155,6 +168,11 @@ console.log(createdBy,"current thing")
     </div>
     <div style={{height:"72px"}}></div>
     <Audioplayer episodesarr={episodesarr} audioSrc={playingFile} image={currentpodcast.displayimg} currentplayfileindex={currentplayfileindex} setCurrentplayfileindex={setCurrentplayfileindex}/>
+ 
+ {/* //Offcanvas for Edit of Podcast */}
+  
+  <Updatepodcastdata currentpodcast={currentpodcast} setDummystate={setDummystate}/>
+  <Updateepisodedata currentpodcast={currentpodcast} setDummystate={setDummystate}/>
   </div>
   
   )

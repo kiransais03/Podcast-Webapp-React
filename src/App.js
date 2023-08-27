@@ -1,7 +1,7 @@
 
 import './App.css';
 import React,{useEffect} from 'react';
-import {Routes,Route} from "react-router-dom";
+import {Routes,Route, Link} from "react-router-dom";
 import Signuppage from './pages/Signup-page/Signuppage';
 import Loginpage from './pages/Login-page/Loginpage';
 import Header from './components/Common-Components/Header/Header';
@@ -22,12 +22,17 @@ import Createanepisodepage from './pages/CreateAnEpisode-page/Createanepisodepag
 import Forgotpassword from './pages/Forgotpassword-page/Forgotpassword-page';
 import Podcastsdisplay from './components/Podcasts-Display/Podcastsdisplay';
 import Landingpage from './pages/Landingpage/Landingpage';
+import logo from "./images/logo.png";
+import Privaterouteslogin from './components/Privaterouteslogin';
+import {useAuthState} from "react-firebase-hooks/auth"; 
+import textimg from "./images/text.jpg"
 
 function App() {
 
   let dispatch=useDispatch();
   let reduxdata=useSelector((state)=>{return state});
-  console.log(reduxdata,"Redux Data")
+  console.log(reduxdata,"Redux Data");
+  let [user,loading,error]=useAuthState(auth);
 
   //In this useEffect we are calling the "onAuthStateChanged" function.This will be triggered when there is 
   //any small change in the user login data.That means if the user Login,Logout,or Clicked on Login 
@@ -80,12 +85,19 @@ function App() {
 
   return (
    <div className='main'>
+    <div style={{textAlign:"center"}}>
+     {user? <Link to="/podcasts">
+        <img style={{borderRadius:"10px",width:"3rem",marginTop:"5px"}} src={logo} alt='logo1'/>
+      </Link>:<Link to="/">
+        <img style={{borderRadius:"10px",width:"3rem",marginTop:"5px"}} src={logo} alt='logo1'/>
+      </Link> }
+      </div>
     <Header/>
       <ToastContainer/>
       <Routes>
         <Route path='' element={<Landingpage/>}/>
-        <Route path="/signup" element={<Signuppage/>}/>
-        <Route path="/login" element={<Loginpage/>}/>
+        {/* <Route path="/signup" element={<Signuppage/>}/>
+        <Route path="/login" element={<Loginpage/>}/> */}
         <Route path='/forgotpassword' element={<Forgotpassword/>}/>
        <Route element={<Privateroutes/>}>       
                          {/*In private Route there is no "path" attribute*/}
@@ -104,6 +116,11 @@ function App() {
               </Route>
              <Route path="/podcasts/:id" element={<Podcastdetailspage/>}/>
              <Route path="/podcasts/:id/create-episode" element={<Createanepisodepage/>}/>
+     
+        </Route>
+        <Route element={<Privaterouteslogin/>}>    
+                  <Route path="/signup" element={<Signuppage/>}/>
+                  <Route path="/login" element={<Loginpage/>}/>
         </Route>
       </Routes>
     </div>

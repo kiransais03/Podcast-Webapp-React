@@ -1,0 +1,78 @@
+@import "https://cdn.skypack.dev/wtc-horizontal-scroll/wtc-horizontal-scroll.css";
+
+body {
+  --color: #333;
+  
+  align-items: flex-end;
+  color: var(--color);
+  display: flex;
+  font-family: Roboto, sans-serif;
+  font-weight: 900;
+  min-height: 100vh;
+}
+
+.horizontal-scroll {
+  --scrollbar-height: 16px;
+  --scrollbar-thumb-color: var(--color);
+  --scrollbar-track-color: #efefef;
+  
+  display: block;
+  width: 100%;
+}
+
+.horizontal-scroll__nav-item {
+  z-index: 5;
+}
+
+.horizontal-scroll__nav-item--prev {
+  left: var(--list-pad);
+}
+
+.horizontal-scroll__nav-item--next {
+  right: var(--list-pad);
+}
+
+.horizontal-scroll__nav-button {
+  background: none;
+  border: 0;
+  border-radius: 0;
+  cursor: pointer;
+  font: inherit;
+  font-size: 3rem;
+  padding: 0;
+  
+  @media (hover: hover) {
+    & {
+      transition: transform .2s;
+    }
+    
+    &:hover {
+      transform: scale(1.4)
+    }
+  }
+}
+
+.horizontal-scroll__item {
+  position: relative;
+  text-align: center;
+}
+
+.shape {
+  background-color: hsl(calc(var(--scale) * 25 + 90), 100%, 50%);
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform:
+    translate(-50%, -50%)
+    rotate(calc(var(--scale) * 90deg))
+    scale(calc(var(--scale)));
+  height: 50%;
+  width: 80%;
+}
+
+.name {  
+  font-size: 4rem;
+  position: relative;
+  /* // transform: scale(var(--scale, 1)); */
+  /* // writing-mode: vertical-lr; */
+}

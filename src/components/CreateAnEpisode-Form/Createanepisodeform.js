@@ -7,7 +7,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { auth, db, storage } from '../../firebase'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { toast } from 'react-toastify'
-import { addDoc, collection } from 'firebase/firestore'
+import { addDoc, collection } from 'firebase/firestore';
+import "../Loader/loaderstyles.css"
 
 const Createanepisodeform = () => {
 
@@ -82,7 +83,12 @@ const Createanepisodeform = () => {
         <Input type="text" placeholder="Title" state={title} setState={setTitle} required={true}/>
         <Input type="text" placeholder="Description" state={desc} setState={setDesc} required={true}/>
         <Fileinput text="Click To Upload Audio File" accept="audio/*" id="banner-img" filehandlingfunc={audiofileupload}/>
-        <Button text={loading ? "Uploading Files...." :"Create Episode"} onClick={handleCreateepisode}/>
+        <Button text={loading ?<div><div class="spinner-border spinner-border-sm" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div class="spinner-grow spinner-grow-sm" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div></div>:"Create Episode"} onClick={handleCreateepisode}/>
     </>
   )
 }

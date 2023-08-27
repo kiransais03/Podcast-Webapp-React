@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Header/header-styles.css'
+import './genresheader-styles.css'
 import { Link, useLocation } from 'react-router-dom';
 
 function Genresheader() {
@@ -7,7 +7,7 @@ function Genresheader() {
   let currentpath = location.pathname;
 
   return (
-    <div className='navbar'>
+    <div className='genresbar'>
       <div className='gradient'></div>
       <div className='links'>
       <Link to="/podcasts" className={currentpath==="/podcasts" ?"active":"none"}>All</Link>

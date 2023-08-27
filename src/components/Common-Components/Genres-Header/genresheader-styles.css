@@ -1,0 +1,43 @@
+.genresbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    /* overflow-x: scroll; */
+  }
+  
+  .links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.25rem;
+      /* overflow: hidden; */
+      width: 100%;
+      max-width: 90vw;
+  }
+  
+  .links a{
+      color: #8ea6bb;
+      text-decoration: none;
+  }
+  
+  .links a:hover {
+    color:var(--white);
+    transition: all 0.3s;
+  }
+  
+  .gradient {
+      position: absolute;
+      min-width: 320px;
+      max-width: 800px;
+      height: 150px;
+      margin: auto;
+      background-color:var(--blue);
+      filter:blur(90px);
+      z-index: -1;
+      top:-120px;
+  }
+  
+  .active {
+      color:var(--white)!important;
+  }

@@ -125,7 +125,12 @@ else {
             <Input type="password" placeholder="Password" state={password} setState={setPassword} required={true}/>
             <Input type="password" placeholder="Confirm Password" state={confirmpassword} setState={setConfirmpassword} required={true}/>
             <Fileinput text="Click here to Upload Profile Picture" accept="image/*" id="profilepic" filehandlingfunc={profilepicupload}/>
-            <Button text={loading ? "Loading...." :"Signup"} onClick={handleSingup}/>
+            <Button text={loading ? <div><div class="spinner-border spinner-border-sm" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div class="spinner-grow spinner-grow-sm" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div></div> :"Signup"} onClick={handleSingup}/>
             {/* <button onClick={handleGoogleSignIn}>Sign in with Google</button> */}
         </>
     )

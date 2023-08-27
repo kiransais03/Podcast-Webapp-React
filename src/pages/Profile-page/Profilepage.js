@@ -143,9 +143,13 @@ async function handlenumberUpdate() {
       <h2><VscAccount/> User Account Information</h2>
       <p>Here you can edit information about yourself.Data will be updated immediately</p>
       </div>
+
       <div className='profile-input-div'>
-      <Input type={"text"} placeholder={"Full Name"} state={userName} setState={setUserName} />
-      <button className='profilebtns' onClick={handlenameUpdate}>Update Name</button>
+       <Input type={"text"} placeholder={"Full Name"} state={userName} setState={setUserName} />
+       <button className='profilebtns btn btn-primary' onClick={handlenameUpdate}>Update Name</button>
+      {loading &&  <div class="spinner-border text-primary" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div> }
       </div>
       
       <div className="profile-input-div">
@@ -154,13 +158,13 @@ async function handlenumberUpdate() {
 
       <div className='profile-input-div'>
       <Input type={"text"}  placeholder={"Add Mobile Number"} state={userNumber} setState={setUserNumber} />
-      <button className='profilebtns' onClick={handlenumberUpdate}>Add / Update Mobile Number</button>
+      <button className='profilebtns btn btn-primary' onClick={handlenumberUpdate}>Add / Update Mobile Number</button>
       </div>
 
       <div className='profile-input-div'>
       <Input type={"password"} placeholder={"Create New Password"} state={userPassword} setState={setUserPassword} />
       <Input type={"password"} placeholder={"Confirm New Password"} state={userCnfpassword} setState={setUserCnfpassword} />
-      <button className='profilebtns' onClick={handlepasswordUpdate}>Update Password</button>
+      <button className='profilebtns btn btn-primary' onClick={handlepasswordUpdate}>Update Password</button>
       </div>
      
      <div className='logout-btn'>

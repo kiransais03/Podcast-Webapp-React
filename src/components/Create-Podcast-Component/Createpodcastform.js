@@ -94,11 +94,11 @@ const Createpodcastform = () => {
             </div>
             <Fileinput text="Click To Upload Banner Image" accept="image/*" id="banner-img" filehandlingfunc={bannerimgupload}/>
             <Fileinput text="Click To Upload Display Image" accept="image/*" id="display-img" filehandlingfunc={displayimgupload}/>
-            <Button text={loading ? <div><div class="spinner-border spinner-border-sm" role="status">
-  <span class="visually-hidden">Loading...</span>
+            <Button text={loading ? <div><div className="spinner-border spinner-border-sm" role="status">
+  <span className="visually-hidden">Loading...</span>
 </div>
-<div class="spinner-grow spinner-grow-sm" role="status">
-  <span class="visually-hidden">Loading...</span>
+<div className="spinner-grow spinner-grow-sm" role="status">
+  <span className="visually-hidden">Loading...</span>
 </div></div>:"Create Now"} onClick={handleCreatepodcast}/>
     </>
   )

@@ -62,6 +62,8 @@ function App() {
                   name: userData.name,
                   email: userData.email,
                   uid: userData.uid,
+                  number :userData.number,
+                  profilepic:userData.profilepic,
                 })
               );
             }

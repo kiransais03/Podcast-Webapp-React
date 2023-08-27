@@ -19,7 +19,7 @@ function Privaterouteslogin() {
 
   if(loading)
   {
-   return (<div><span class="loader"></span></div>)
+   return (<div><span className="loader"></span></div>)
   }
    else if(error || user)
    {

@@ -127,15 +127,19 @@ function Updateepisodedata({title,description,audiofile,episodeid,setDummystate,
          <button className="btn btn-primary" type="button" onClick={handleEpisodeeditfunc}>Update Data</button>
     </div>
     <Fileinput text="Click To Upload Audio File" accept="audio/*" id={index} filehandlingfunc={audiofileupload}/>
-        <Button text={loading ?<div><div class="spinner-border spinner-border-sm" role="status">
-  <span class="visually-hidden">Loading...</span>
+    <div className="d-grid gap-2 col-6 mx-auto" style={{margin:"25px 0"}}>
+        <button  className="btn btn-primary" type="button" onClick={handleAudiouploadfunc}>{loading ?<div><div className="spinner-border spinner-border-sm" role="status">
+  <span className="visually-hidden">Loading...</span>
 </div>
-<div class="spinner-grow spinner-grow-sm" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div></div>:"Create Episode"} onClick={handleAudiouploadfunc}/>
+<div className="spinner-grow spinner-grow-sm" role="status">
+  <span className="visually-hidden">Loading...</span>
+</div></div>:"Update Audio File"}</button>
+  </div>
   </div>
 </div>
   )
 }
 
 export default Updateepisodedata;
+
+

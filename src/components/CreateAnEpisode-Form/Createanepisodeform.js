@@ -83,11 +83,11 @@ const Createanepisodeform = () => {
         <Input type="text" placeholder="Title" state={title} setState={setTitle} required={true}/>
         <Input type="text" placeholder="Description" state={desc} setState={setDesc} required={true}/>
         <Fileinput text="Click To Upload Audio File" accept="audio/*" id="banner-img" filehandlingfunc={audiofileupload}/>
-        <Button text={loading ?<div><div class="spinner-border spinner-border-sm" role="status">
-  <span class="visually-hidden">Loading...</span>
+        <Button text={loading ?<div><div className="spinner-border spinner-border-sm" role="status">
+  <span className="visually-hidden">Loading...</span>
 </div>
-<div class="spinner-grow spinner-grow-sm" role="status">
-  <span class="visually-hidden">Loading...</span>
+<div className="spinner-grow spinner-grow-sm" role="status">
+  <span className="visually-hidden">Loading...</span>
 </div></div>:"Create Episode"} onClick={handleCreateepisode}/>
     </>
   )

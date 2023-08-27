@@ -41,6 +41,8 @@ const Loginform =()=>{
                 name:userData.name,
                 email:user.email,
                 uid : user.uid,
+                number:user.number,
+                profilepic:user.profilepic,
               }))
               setLoading(false);
               toast.success('Login Successful');
@@ -74,11 +76,11 @@ const Loginform =()=>{
     return(<>
             <Input type="text" placeholder="Email" state={email} setState={setEmail} required={true}/>
             <Input type="password" placeholder="Password" state={password} setState={setPassword} required={true}/>
-            <Button text={loading ? <div><div class="spinner-border spinner-border-sm" role="status">
-  <span class="visually-hidden">Loading...</span>
+            <Button text={loading ? <div><div className="spinner-border spinner-border-sm" role="status">
+  <span className="visually-hidden">Loading...</span>
 </div>
-<div class="spinner-grow spinner-grow-sm" role="status">
-  <span class="visually-hidden">Loading...</span>
+<div className="spinner-grow spinner-grow-sm" role="status">
+  <span className="visually-hidden">Loading...</span>
 </div></div>: "Login"} onClick={handleLogin}/>
         </>
     )

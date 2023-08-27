@@ -11,6 +11,7 @@
   flex-wrap: wrap;
   align-items:center;
   /* margin: 2rem; */
+  margin: 5px;
 }
 
 .profile-input-div input {
@@ -29,6 +30,9 @@
     margin: 2rem;
 }
 
+.profile-img-div {
+    width: 50%;
+}
 
 @media screen and (min-width:0px) and (max-width:600px) {
     .profile-input-div input {
@@ -37,5 +41,9 @@
 
     .custom-btn {
         width: auto;
+    }
+
+    .profile-img-div {
+        width: 100%;
     }
 }

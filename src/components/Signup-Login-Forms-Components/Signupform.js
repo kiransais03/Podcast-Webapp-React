@@ -41,9 +41,9 @@ const Signupform =()=>{
             console.log(user);
           
             //Upload the image to the Storage and get the link
-            const profilepicref = ref(storage, `userprofilepics/${auth.currentUser.uid}/${profilepic[0].name}${Date.now()})}`);
+            const profilepicref = ref(storage, `userprofilepics/${auth.currentUser.uid}/${profilepic[0].name}${Date.now()}`);
 
-           uploadBytes(profilepicref, profilepic).then((snapshot) => {
+           await uploadBytes(profilepicref, profilepic[0]).then((snapshot) => {
              console.log('Uploaded profile picture');
             });
 
@@ -125,11 +125,11 @@ else {
             <Input type="password" placeholder="Password" state={password} setState={setPassword} required={true}/>
             <Input type="password" placeholder="Confirm Password" state={confirmpassword} setState={setConfirmpassword} required={true}/>
             <Fileinput text="Click here to Upload Profile Picture" accept="image/*" id="profilepic" filehandlingfunc={profilepicupload}/>
-            <Button text={loading ? <div><div class="spinner-border spinner-border-sm" role="status">
-  <span class="visually-hidden">Loading...</span>
+            <Button text={loading ? <div><div className="spinner-border spinner-border-sm" role="status">
+  <span className="visually-hidden">Loading...</span>
 </div>
-<div class="spinner-grow spinner-grow-sm" role="status">
-  <span class="visually-hidden">Loading...</span>
+<div className="spinner-grow spinner-grow-sm" role="status">
+  <span className="visually-hidden">Loading...</span>
 </div></div> :"Signup"} onClick={handleSingup}/>
             {/* <button onClick={handleGoogleSignIn}>Sign in with Google</button> */}
         </>

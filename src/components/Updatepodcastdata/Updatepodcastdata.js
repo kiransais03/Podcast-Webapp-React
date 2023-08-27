@@ -19,6 +19,7 @@ function Updatepodcastdata({currentpodcast,setDummystate}) {
     const [displayedit,setDisplayedit]=useState("");
 
     const [loading,setLoading] = useState(false);
+    const [loading2,setLoading2] = useState(false);
     console.log(titleedit,"this is the useState titile")
 
     useEffect(()=>{
@@ -96,6 +97,7 @@ function Updatepodcastdata({currentpodcast,setDummystate}) {
     catch(error) {
       console.log(error);
       toast.error("Some error occurred :",error.message);
+      setBanneredit("")
       setLoading(false);
     }
     }
@@ -115,7 +117,7 @@ function Updatepodcastdata({currentpodcast,setDummystate}) {
         if(displayedit)
         {
           try {
-           setLoading(true);
+           setLoading2(true);
     
           const displayimgRef = ref(storage, `podcastimages/${auth.currentUser.uid}/${displayedit[0].name}${Date.now()})}`);
           await uploadBytes(displayimgRef, displayedit[0]).then((snapshot) => {
@@ -133,14 +135,15 @@ function Updatepodcastdata({currentpodcast,setDummystate}) {
            
           
           toast.success("Display Image Uploaded Successfully");
-          setLoading(false);
+          setLoading2(false);
+          setDisplayedit("")
           setDummystate("dummycallfor-re-render");
           
         }
         catch(error) {
           console.log(error);
           toast.error("Some error occurred :",error.message);
-          setLoading(false);
+          setLoading2(false);
         }
         }
         else {
@@ -172,9 +175,25 @@ function Updatepodcastdata({currentpodcast,setDummystate}) {
          <button className="btn btn-primary" type="button" onClick={handlePodcastedit}>Update Data</button>
     </div>
     <Fileinput text="Click To Select New Banner Image" accept="image/*" id="banner-img" filehandlingfunc={bannerimguploadeditfunc}/>
-    <button className='profilebtns btn btn-primary' onClick={handlebannerimgupdate}>Update Banner Image</button>
+   
+    <button className='profilebtns btn btn-primary' onClick={handlebannerimgupdate}>
+      {loading ?<div><div className="spinner-border spinner-border-sm" role="status">
+  <span className="visually-hidden">Loading...</span>
+</div>
+<div className="spinner-grow spinner-grow-sm" role="status">
+  <span className="visually-hidden">Loading...</span>
+</div></div>:"Update Banner Image"}</button>
+
+
     <Fileinput text="Click To Select New Display Image" accept="image/*" id="display-img" filehandlingfunc={displayimguploadeditfunc}/>
-    <button className='profilebtns btn btn-primary' onClick={handledisplayimgupdate}>Update Display Image</button>
+    <button className='profilebtns btn btn-primary' onClick={handledisplayimgupdate}>
+      {loading2 ?<div><div className="spinner-border spinner-border-sm" role="status">
+  <span className="visually-hidden">Loading...</span>
+</div>
+<div className="spinner-grow spinner-grow-sm" role="status">
+  <span className="visually-hidden">Loading...</span>
+</div></div>:"Update Display Image"}</button>
+
   </div>
 </div>
   )

@@ -24,6 +24,7 @@ const Podcastdetailspage = () => {
   const [dummystate,setDummystate]=useState("") //Dummy state just for rendering after updating the podcast data in another component
 
   let [createdBy,setCreatedBy] = useState("");
+  let [idstore,setidstore]=useState(id);
   
   let currpodData="";
   
@@ -174,7 +175,7 @@ console.log(createdBy,"current user")
  
  {/* //Offcanvas for Edit of Podcast */}
   
-  <Updatepodcastdata currentpodcast={currentpodcast} setDummystate={setDummystate}/>
+  <Updatepodcastdata currentpodcast={currentpodcast} getData1={getData1} setDummystate={setDummystate}/>
   
   </div>
   

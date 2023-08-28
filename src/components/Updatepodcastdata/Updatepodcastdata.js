@@ -3,9 +3,10 @@ import Fileinput from '../Common-Components/Fileinput/Fileinput';
 import Input from '../Common-Components/Input/Input';
 import ControllableStates from '../Common-Components/Autocomplete/ControllableStates';
 import { toast } from 'react-toastify';
-import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { auth, db, storage } from '../../firebase';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { useNavigate } from 'react-router-dom';
 
 function Updatepodcastdata({currentpodcast,setDummystate}) {
     //Edit Podcast Data Functions
@@ -20,7 +21,10 @@ function Updatepodcastdata({currentpodcast,setDummystate}) {
 
     const [loading,setLoading] = useState(false);
     const [loading2,setLoading2] = useState(false);
-    console.log(titleedit,"this is the useState titile")
+    const [loading3,setLoading3] = useState(false);
+    console.log(titleedit,"this is the useState titile");
+
+    let navigate=useNavigate();
 
     useEffect(()=>{
         if (currentpodcast) {
@@ -158,6 +162,26 @@ function Updatepodcastdata({currentpodcast,setDummystate}) {
 
     }
 
+
+    async function deletepodcastfunc() {
+       try {
+        setLoading3(true);
+        await deleteDoc(doc(db, "podcasts", currentpodcast.id));
+        toast.success("Podcast Deleted Successfully");
+        setLoading3(false);
+        // setTimeout(()=>{ navigate("/podcasts");},2000)
+        window.location.reload();
+       
+       }
+       catch(error) {
+        setLoading3(false);
+        toast.error(`Some error occurred ${error.message}`)
+       }
+    }
+
+
+
+
   return (
 
 <div className="offcanvas offcanvas-start" data-bs-backdrop="static" tabIndex="-1" id="staticBackdrop1" data-bs-theme="dark" aria-labelledby="staticBackdropLabel">
@@ -194,6 +218,14 @@ function Updatepodcastdata({currentpodcast,setDummystate}) {
 <div className="spinner-grow spinner-grow-sm" role="status">
   <span className="visually-hidden">Loading...</span>
 </div></div>:"Update Display Image"}</button>
+<br/>
+<button style={{margin:"20px 0"}} className='profilebtns btn btn-danger' onClick={deletepodcastfunc}>
+      {loading3 ?<div><div className="spinner-border spinner-border-sm" role="status">
+  <span className="visually-hidden">Loading...</span>
+</div>
+<div className="spinner-grow spinner-grow-sm" role="status">
+  <span className="visually-hidden">Loading...</span>
+</div></div>:"Delete Podcast"}</button>
 
   </div>
 </div>

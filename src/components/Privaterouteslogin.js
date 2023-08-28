@@ -23,50 +23,7 @@ function Privaterouteslogin() {
  
   useEffect(()=>{ct=0;},[])
 
-  // useEffect(() => {
-  //   if (user) {
-  //     let isMounted = true;
-  
-  //     async function fetchData() {
-  //       try {
-  //         const userDoc = await getDoc(db, "users", user.uid);
-  //         const userData = userDoc.data();
-  
-  //         if (isMounted) {
-  //           dispatch(setUser({
-  //             name: userData.name,
-  //             email: user.email,
-  //             uid: user.uid,
-  //             number: user.number,
-  //             profilepic: user.profilepic,
-  //           }));
-  //         }
-  //       } catch (error) {
-  //         // Handle Firestore data retrieval error
-  //         // For example, you can log the error message
-  //         console.error("Firestore data retrieval error:", error);
-  //         deleteUser(user).then(() => {
-  //           console.log("account deleted")
-  //         }).catch((error) => {
-  //           console.log("Account an into a problem");
-  //           toast.error("Account an into a problem",error.message);
-  //         });
-  //         toast.error("Some error occured,white creating account,Please retry");
-  //         console.log(error.message)
-         
-  //         dispatch(setUser({})); // Clear user data from state
-  //       }
-  //     }
-  
-  //     fetchData();
-  
-  //     return () => {
-  //       isMounted = false;
-  //     };
-  //   }
-  // }, [user]);
-  
-  
+
   
 
   if(loading)

@@ -3,7 +3,7 @@ import Fileinput from '../Common-Components/Fileinput/Fileinput';
 import Input from '../Common-Components/Input/Input';
 import ControllableStates from '../Common-Components/Autocomplete/ControllableStates';
 import { toast } from 'react-toastify';
-import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { auth, db, storage } from '../../firebase';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import Button from '../Common-Components/Button/Button';
@@ -18,6 +18,7 @@ function Updateepisodedata({title,description,audiofile,episodeid,setDummystate,
     const [audiofileedit,setAudiofileedit]=useState("");
 
     const [loading,setLoading] = useState(false);
+    const [loading2,setLoading2] = useState(false);
     console.log(titleedit,"this is the useState titile")
 
     useEffect(()=>{
@@ -113,11 +114,27 @@ function Updateepisodedata({title,description,audiofile,episodeid,setDummystate,
 }
 
 
+async function deleteepisodefunc() {
+  try {
+    setLoading2(true);
+   await deleteDoc(doc(db, "podcasts", currentpodcast.id,"episodes",episodeid));
+   toast.success("Episode Deleted Successfully");
+   setLoading2(false);
+   // setTimeout(()=>{ navigate("/podcasts");},2000)
+   window.location.reload();
+  }
+  catch(error) {
+    setLoading2(false);
+   toast.error(`Some error occurred ${error.message}`)
+  }
+}
+
+
   return (
 
 <div className="offcanvas offcanvas-end" data-bs-backdrop="static" tabIndex="-1" id={`${episodeid}b`} data-bs-theme="dark" aria-labelledby={`${episodeid}b`}>
   <div className="offcanvas-header">
-    <h5 className="offcanvas-title" id="staticBackdropLabel">Edit Podcast:{title} </h5>
+    <h5 className="offcanvas-title" id="staticBackdropLabel">Edit Episode:{title} </h5>
     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div className="offcanvas-body">
@@ -134,6 +151,15 @@ function Updateepisodedata({title,description,audiofile,episodeid,setDummystate,
 <div className="spinner-grow spinner-grow-sm" role="status">
   <span className="visually-hidden">Loading...</span>
 </div></div>:"Update Audio File"}</button>
+
+<br/>
+<button style={{margin:"20px 0"}} className='profilebtns btn btn-danger' onClick={deleteepisodefunc}>
+      {loading2 ?<div><div className="spinner-border spinner-border-sm" role="status">
+  <span className="visually-hidden">Loading...</span>
+</div>
+<div className="spinner-grow spinner-grow-sm" role="status">
+  <span className="visually-hidden">Loading...</span>
+</div></div>:"Delete Episode"}</button>
   </div>
   </div>
 </div>

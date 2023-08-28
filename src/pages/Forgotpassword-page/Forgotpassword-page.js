@@ -21,7 +21,7 @@ const Forgotpassword =()=>{
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      toast.error(errorCode,errorMessage);
+      toast.error(`Some error occured ${error.message}`);
       // ..
     });
       }

@@ -50,7 +50,7 @@ function Profilepage() {
       setLoading(false);
       dispatch(clearUser())
     })
-    .catch((error)=>{toast.error("Some Error Occurred:",error.message); setLoading(false);})
+    .catch((error)=>{toast.error(`Some error occured ${error.message}`); setLoading(false);})
   }
 
 
@@ -75,7 +75,7 @@ if(userdetails.name===userName) {
 
   }
   catch(error) {
-    toast.error("Some error occured,please retry",error.message);
+    toast.error(`Some error occured ${error.message}`);
     console.log(error.message);
   }
 }
@@ -105,7 +105,7 @@ async function handlenumberUpdate() {
     
       }
       catch(error) {
-        toast.error("Some error occured,please retry",error.message);
+        toast.error(`Some error occured ${error.message}`);
         console.log(error.message);
       }
   }
@@ -124,13 +124,13 @@ async function handlenumberUpdate() {
           updatePassword(user, userPassword).then(() => {
            toast.success("Password updated successfully");
           }).catch((error) => {
-            toast.error("Some error occurred,please try again",error.message);
+            toast.error(`Some error occured ${error.message}`);
             console.log(error.message)
           });
       
         }
         catch(error) {
-          toast.error("Some error occured,please retry",error.message);
+          toast.error(`Some error occured ${error.message}`);
           console.log(error.message);
         }
     }
@@ -178,7 +178,7 @@ async function handledisplayimgupdate() {
   }
   catch(error) {
     console.log(error);
-    toast.error("Some error occurred :",error.message);
+    toast.error(`Some error occured ${error.message}`);
     setLoading2(false);
   }
   }

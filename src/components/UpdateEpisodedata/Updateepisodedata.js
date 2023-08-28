@@ -46,7 +46,7 @@ function Updateepisodedata({title,description,audiofile,episodeid,setDummystate,
     
       }
       catch(error) {
-        toast.error("Some error occured,please retry",error.message);
+        toast.error(`Some error occured ${error.message}`);
         console.log(error.message);
       }
     }
@@ -98,7 +98,7 @@ function Updateepisodedata({title,description,audiofile,episodeid,setDummystate,
     }
     catch(error) {
       console.log(error);
-      toast.error("Some error occurred :",error.message);
+      toast.error(`Some error occured ${error.message}`);
       setLoading(false);
     }
     }

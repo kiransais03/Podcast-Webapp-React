@@ -54,7 +54,7 @@ const Loginform =()=>{
         }
         catch(error){
             setLoading(false);
-            toast.error(error,error.message);
+            toast.error(`Some error occured ${error.message}`);
             setPassword("")
             console.log("Some Error Occured :",error.message)
         }

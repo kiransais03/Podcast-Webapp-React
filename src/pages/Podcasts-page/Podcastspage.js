@@ -32,7 +32,7 @@ const unsubscribe = onSnapshot(query(collection(db, "podcasts")), (querySnapshot
 },
 (error)=>
 {
-    toast.error("Some error occurred:",error.message)
+  toast.error(`Some error occured ${error.message}`);
 });
 
     return ()=>{

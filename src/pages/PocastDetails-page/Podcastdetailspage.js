@@ -58,7 +58,7 @@ const Podcastdetailspage = () => {
 }
 catch(error) {
   console.log("Some error occurred:",error);
-  toast.error("Some error occurred:",error.message)
+  toast.error(`Some error occured ${error.message}`);
 }
 }
 
@@ -78,7 +78,7 @@ console.log("Episodes updated successfully")
 },
 (error)=>
 {
-  toast.error("Some error occurred:",error.message)
+  toast.error(`Some error occured ${error.message}`);
 });
 
   return ()=>{

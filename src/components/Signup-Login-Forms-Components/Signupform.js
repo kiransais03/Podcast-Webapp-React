@@ -75,7 +75,7 @@ const Signupform =()=>{
               
     }
     catch(error){
-        toast.error(error);
+        toast.error(`Some error occured ${error.message}`);
         console.log("Some Error Occured23 :",error.message);
         setLoading(false);
     }

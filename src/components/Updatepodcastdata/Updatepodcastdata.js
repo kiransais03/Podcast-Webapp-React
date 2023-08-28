@@ -48,7 +48,7 @@ function Updatepodcastdata({currentpodcast,setDummystate}) {
     
       }
       catch(error) {
-        toast.error("Some error occured,please retry",error.message);
+        toast.error(`Some error occured ${error.message}`);
         console.log(error.message);
       }
     }
@@ -97,7 +97,7 @@ function Updatepodcastdata({currentpodcast,setDummystate}) {
     }
     catch(error) {
       console.log(error);
-      toast.error("Some error occurred :",error.message);
+      toast.error(`Some error occured ${error.message}`);
       setBanneredit("")
       setLoading(false);
     }
@@ -143,7 +143,7 @@ function Updatepodcastdata({currentpodcast,setDummystate}) {
         }
         catch(error) {
           console.log(error);
-          toast.error("Some error occurred :",error.message);
+          toast.error(`Some error occured ${error.message}`);
           setLoading2(false);
         }
         }

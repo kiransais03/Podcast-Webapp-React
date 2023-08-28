@@ -68,7 +68,7 @@ const Createpodcastform = () => {
     }
     catch(error) {
       console.log(error);
-      toast.error("Some error occurred :",error.message);
+      toast.error(`Some error occured ${error.message}`);
       setLoading(false);
     }
     }

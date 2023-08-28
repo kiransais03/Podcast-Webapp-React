@@ -39,10 +39,10 @@ const Loginform =()=>{
 
             dispatch(setUser({
                 name:userData.name,
-                email:user.email,
-                uid : user.uid,
-                number:user.number,
-                profilepic:user.profilepic,
+                email:userData.email,
+                uid : userData.uid,
+                number:userData.number,
+                profilepic:userData.profilepic,
               }))
               setLoading(false);
               toast.success('Login Successful');

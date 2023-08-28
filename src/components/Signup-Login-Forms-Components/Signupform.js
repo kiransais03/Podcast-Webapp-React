@@ -70,14 +70,14 @@ const Signupform =()=>{
               setLoading(false);
               toast.success('Signup Successful');
 
+              console.log("Signup Successfull.")
              navigate1("/profile");
               
-            console.log("Signup Successfull.")
     }
     catch(error){
+        toast.error(error);
+        console.log("Some Error Occured23 :",error.message);
         setLoading(false);
-        toast.error('Account with this Email Already Exist.Please Login.');
-         console.log("Some Error Occured :",error.code,error.message)
     }
 }
 else {

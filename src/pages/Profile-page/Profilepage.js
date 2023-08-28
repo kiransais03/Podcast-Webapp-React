@@ -75,7 +75,7 @@ if(userdetails.name===userName) {
 
   }
   catch(error) {
-    toast.error("Some error occured,please retry");
+    toast.error("Some error occured,please retry",error.message);
     console.log(error.message);
   }
 }
@@ -105,7 +105,7 @@ async function handlenumberUpdate() {
     
       }
       catch(error) {
-        toast.error("Some error occured,please retry");
+        toast.error("Some error occured,please retry",error.message);
         console.log(error.message);
       }
   }
@@ -124,7 +124,7 @@ async function handlenumberUpdate() {
           updatePassword(user, userPassword).then(() => {
            toast.success("Password updated successfully");
           }).catch((error) => {
-            toast.error("Some error occurred,please try again");
+            toast.error("Some error occurred,please try again",error.message);
             console.log(error.message)
           });
       

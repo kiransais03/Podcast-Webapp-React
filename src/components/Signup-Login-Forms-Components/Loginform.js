@@ -47,16 +47,16 @@ const Loginform =()=>{
               setLoading(false);
               toast.success('Login Successful');
 
+              console.log("Login Successfull.")
              navigate1("/profile")
               
-            console.log("Login Successfull.")
 
         }
         catch(error){
             setLoading(false);
-            toast.error("Please check Email Id and Password");
+            toast.error(error,error.message);
             setPassword("")
-            console.log("Some Error Occured :",error.code,error.message)
+            console.log("Some Error Occured :",error.message)
         }
     }
     else {

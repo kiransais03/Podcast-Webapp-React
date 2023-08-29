@@ -25,7 +25,6 @@ import Landingpage from './pages/Landingpage/Landingpage';
 import logo from "./images/logo.png";
 import Privaterouteslogin from './components/Privaterouteslogin';
 import {useAuthState} from "react-firebase-hooks/auth"; 
-import textimg from "./images/text.jpg"
 
 function App() {
 
@@ -89,9 +88,9 @@ function App() {
    <div className='main'>
     <div style={{textAlign:"center"}}>
      {user? <Link to="/podcasts">
-        <img style={{borderRadius:"10px",width:"3rem",marginTop:"5px"}} src={logo} alt='logo1'/>
+        <img style={{borderRadius:"10px",width:"11rem",height:"4rem",marginTop:"5px"}} src={logo} alt='logo1'/>
       </Link>:<Link to="/">
-        <img style={{borderRadius:"10px",width:"3rem",marginTop:"5px"}} src={logo} alt='logo1'/>
+        <img style={{borderRadius:"10px",width:"12rem",height:"4rem",marginTop:"5px"}} src={logo} alt='logo1'/>
       </Link> }
       </div>
     <Header/>

@@ -1,6 +1,6 @@
 import React from 'react'
 import "./fullpageloader-styles.css"
-import logo from "../../images/logo.png"
+import logo from "../../images/logo1.png"
 
 function Fullpageloader() {
   return (

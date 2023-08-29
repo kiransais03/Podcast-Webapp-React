@@ -6,31 +6,32 @@ let initialState={
     playingFile:"",
     image:"",
     currentplayfileindex:"",
-    setCurrentplayfileindex:"",
+    setNewindexInCurrentplayfileindex:"",
+    ispodcastdetailspageunmounted:true,
 }
 
 const audioplayerSlices = createSlice({
-    name:"audioplayer-redux",
+    name:"audioplayerredux",
    initialState:initialState,
    reducers:{
-    setEpisodesarr:(state,action)=>{
+    setEpisodesarrredux:(state,action)=>{
         state.episodesarr=action.payload;
     },
-    setPlayingFile:(state,action)=>{
+    setPlayingFileredux:(state,action)=>{
         state.playingFile=action.payload;
     },
-    setImage:(state,action)=>{
+    setImageredux:(state,action)=>{
         state.image=action.payload;
     },
-    setCurrentplayfileindex:(state,action)=>{
+    setCurrentplayfileindexredux:(state,action)=>{
         state.currentplayfileindex=action.payload;
     },
-    setSetCurrentplayfileindex:(state,action)=>{
-        state.setCurrentplayfileindex=action.payload;
-    }
+    setsetNewindexInCurrentplayfileindex:(state,action)=>{
+        state.setNewindexInCurrentplayfileindex=action.payload;
+    },
    }
 })
 
 
-export const {setEpisodesarr,setPlayingFile,setImage,setCurrentplayfileindex,setSetCurrentplayfileindex}=audioplayerSlices.actions;
+export const {setEpisodesarrredux,setPlayingFileredux,setImageredux,setCurrentplayfileindexredux,setsetNewindexInCurrentplayfileindex}=audioplayerSlices.actions;
 export default audioplayerSlices.reducer;

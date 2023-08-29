@@ -1,7 +1,7 @@
 
 import './App.css';
-import React,{useEffect} from 'react';
-import {Routes,Route, Link} from "react-router-dom";
+import React,{useEffect, useRef, useState} from 'react';
+import {Routes,Route, Link, useLocation} from "react-router-dom";
 import Signuppage from './pages/Signup-page/Signuppage';
 import Loginpage from './pages/Login-page/Loginpage';
 import Header from './components/Common-Components/Header/Header';
@@ -25,6 +25,7 @@ import Landingpage from './pages/Landingpage/Landingpage';
 import logo from "./images/logo.png";
 import Privaterouteslogin from './components/Privaterouteslogin';
 import {useAuthState} from "react-firebase-hooks/auth"; 
+import Audioplayer from './components/AudioPlayer/Audioplayer';
 
 function App() {
 
@@ -33,6 +34,57 @@ function App() {
   console.log(reduxdata,"Redux Data");
   let [user,loading,error]=useAuthState(auth);
 
+  let location = useLocation();
+
+  const [displayAudioplayer,setDisplayAudioplayer] = useState(false);
+
+  let currlocation= location.pathname;
+
+  let id = useRef();
+
+
+console.log(currlocation,"why flick current")
+  useEffect(()=>{  //If we click login,signup tabs generally it will redirect and come back because of login is there.So to handle that case 
+                      // we are using this setTimeout.This will wait for some time to validation complete in privatelogin and then only hide player
+     if(id.current)
+     {
+      clearTimeout(id.current);
+     }
+  
+   const timer = setTimeout(()=>{
+      console.log("inside setTimeout why flick",currlocation)
+      if(currlocation.includes("/signup"))
+      {
+        setDisplayAudioplayer(false);
+        console.log("disp false",currlocation)
+      }
+      else if(currlocation.includes("/login"))
+      {
+        setDisplayAudioplayer(false);
+        console.log("disp false",currlocation)
+      }
+      else if(currlocation.includes("/forgotpassword"))
+      {
+        setDisplayAudioplayer(false);
+        console.log("disp false",currlocation)
+      }
+      else if(currlocation==="/")
+      {
+        setDisplayAudioplayer(false);
+        console.log("disp false",currlocation)
+      }
+      else {
+        setDisplayAudioplayer(true);
+        console.log("disp true",currlocation.includes("/profile"));
+      }
+    console.log("why flickering")
+    },1000)
+
+    id.current =timer;
+   
+  },[currlocation])
+
+  console.log(displayAudioplayer,"this is the disp")
   //In this useEffect we are calling the "onAuthStateChanged" function.This will be triggered when there is 
   //any small change in the user login data.That means if the user Login,Logout,or Clicked on Login 
   //And it is loading,Clicked on Logout it is loading,Any error during Login or Logout.This function
@@ -124,6 +176,7 @@ function App() {
                   <Route path="/login" element={<Loginpage/>}/>
         </Route>
       </Routes>
+      {displayAudioplayer  && <Audioplayer/>}
     </div>
   );
 }

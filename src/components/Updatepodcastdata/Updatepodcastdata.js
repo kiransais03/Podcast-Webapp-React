@@ -12,7 +12,7 @@ function Updatepodcastdata({currentpodcast,setDummystate}) {
     //Edit Podcast Data Functions
 
     //EditPodcast menu data states
-    console.log(currentpodcast,"from update podcast")
+    // console.log(currentpodcast,"from update podcast")
     const [titleedit,setTitleedit]=useState("");
     const [descedit,setDescedit]=useState("");
     const [genreedit,setGenreedit]=useState("");

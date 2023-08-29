@@ -51,6 +51,7 @@ const unsubscribe = onSnapshot(query(collection(db, "podcasts")), (querySnapshot
            {/* <Podcastsdisplay podcastsarr={podcasts} search={search}/> */}
            <Outlet/>
         </div>
+        <div style={{height:"80px"}}></div>
     </div>
   )
 }

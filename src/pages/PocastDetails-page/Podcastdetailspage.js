@@ -5,13 +5,14 @@ import {auth, db} from "../../firebase";
 import { toast } from 'react-toastify';
 import Button from "../../components/Common-Components/Button/Button";
 import "./podcastdetailspage-styles.css"
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Episodedetails from '../../components/Episode-Details/Episodedetails';
 import { setPodcasts } from '../../slices/podcastSlices';
 import Audioplayer from '../../components/AudioPlayer/Audioplayer';
 import Genretag from '../../components/Common-Components/Genretag/Genretag';
 import Updatepodcastdata from '../../components/Updatepodcastdata/Updatepodcastdata';
 import Updateepisodedata from '../../components/UpdateEpisodedata/Updateepisodedata';
+import {setEpisodesarrredux,setPlayingFileredux,setCurrentplayfileindexredux, setImageredux, setsetNewindexInCurrentplayfileindex } from '../../slices/audioplayerSlices';
 
 const Podcastdetailspage = () => {
 
@@ -21,10 +22,12 @@ const Podcastdetailspage = () => {
   const [playingFile,setPlayingfile]=useState("");
   const [currentplayfileindex,setCurrentplayfileindex] = useState("");
 
+  let newindexInCurrentplayfileindex = useSelector((state)=>{return state.audioplayerredux.setNewindexInCurrentplayfileindex;});
+
   const [dummystate,setDummystate]=useState("") //Dummy state just for rendering after updating the podcast data in another component
 
   let [createdBy,setCreatedBy] = useState("");
-  let [idstore,setidstore]=useState(id);
+
   
   let currpodData="";
   
@@ -32,6 +35,17 @@ const Podcastdetailspage = () => {
   let navigate = useNavigate();
 // console.log(id,useParams());
 
+
+
+useEffect(()=>{
+  if(newindexInCurrentplayfileindex!=="")
+  {
+    setCurrentplayfileindex(newindexInCurrentplayfileindex);
+    dispatch(
+      setsetNewindexInCurrentplayfileindex("")
+      );
+  }
+},[newindexInCurrentplayfileindex,currentplayfileindex,playingFile])
 
   useEffect(()=>{
     if(id)
@@ -93,9 +107,7 @@ setPlayingfile(episodesarr[currentplayfileindex]?.audiofile)
 },[currentplayfileindex])
 
 
-// useEffect(()=>{
-//   getPodcastuserdetails();
-// },[])
+
 
 async function getPodcastuserdetails () {
   console.log(currpodData,"Podcast data")
@@ -111,8 +123,24 @@ async function getPodcastuserdetails () {
    }
    }
 
+function addAudioplayerdatatoRedux () {
+  console.log(episodesarr,currentpodcast.displayimg,"testingt")
+  
+      dispatch(setEpisodesarrredux(episodesarr));
+      dispatch(setPlayingFileredux(playingFile));
+      dispatch(setImageredux(currentpodcast.displayimg));
+      dispatch(setCurrentplayfileindexredux(currentplayfileindex));
+      // dispatch(setsetNewindexInCurrentplayfileindex(setCurrentplayfileindex));
+      console.log("done dispatch")
+ console.log("audio redux dispatch ")
+}
+  
+useEffect(()=>{
+ if(playingFile)
+    addAudioplayerdatatoRedux();
+},[currentplayfileindex,playingFile])
 
-console.log(createdBy,"current user")
+
 
   return (
     <div>
@@ -157,7 +185,7 @@ console.log(createdBy,"current user")
                   audiofile={episode.audiofile}
                   sendfile={(file)=>{ setPlayingfile(file); }}
                   index={index}
-                  setCurrentplayfileindex={setCurrentplayfileindex}
+                  setCurrentplayfileindex={(index)=>{setCurrentplayfileindex(index)}}
                   setDummystate={setDummystate}
                   currentpodcast={currentpodcast}
                   episodeid={episode.id}
@@ -171,7 +199,7 @@ console.log(createdBy,"current user")
       )}
     </div>
     <div style={{height:"72px"}}></div>
-    <Audioplayer episodesarr={episodesarr} audioSrc={playingFile} image={currentpodcast.displayimg} currentplayfileindex={currentplayfileindex} setCurrentplayfileindex={setCurrentplayfileindex}/>
+    {/* <Audioplayer episodesarr={episodesarr} audioSrc={playingFile} image={currentpodcast.displayimg} currentplayfileindex={currentplayfileindex} setCurrentplayfileindex={setCurrentplayfileindex}/> */}
  
  {/* //Offcanvas for Edit of Podcast */}
   

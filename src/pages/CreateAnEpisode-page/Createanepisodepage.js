@@ -10,6 +10,7 @@ const Createanepisodepage = () => {
             <h1>Create An Episode</h1>
             <Createanepisodeform/>
         </div>
+        <div style={{height:"72px"}}></div>
     </div>
   )
 }

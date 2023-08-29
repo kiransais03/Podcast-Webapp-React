@@ -11,6 +11,7 @@ const clickfunction = ()=>{
   console.log("Episodes array",index)
   setCurrentplayfileindex(index);
 }
+
   return (
     <div style={{width:"100%"}}>
       <h1 style={{textAlign:"left",marginBottom:"0",fontSize:"16px"}}>{title}</h1>

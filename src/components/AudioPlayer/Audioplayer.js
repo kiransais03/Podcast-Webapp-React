@@ -3,8 +3,25 @@ import { FaPause,FaPlay, FaVolumeMute, FaVolumeUp } from 'react-icons/fa';
 import {RxTrackPrevious,RxTrackNext} from 'react-icons/rx'
 import "./audioplayer-styles.css";
 import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+import nopodcast from "../../images/nodata.jpg"
+import {setsetNewindexInCurrentplayfileindex} from "../../slices/audioplayerSlices";
 
-function Audioplayer  ({audioSrc,image,currentplayfileindex,setCurrentplayfileindex,episodesarr})  {
+function Audioplayer  ()  {
+
+  let audioplayerRedux = useSelector((state)=>{return state.audioplayerredux;});
+
+  let dispatch = useDispatch();
+
+  // console.log("Auido redux data receiving",audioplayerRedux);
+
+  let audioSrc=audioplayerRedux.playingFile;
+  let image = audioplayerRedux.image;
+  let currentplayfileindex = audioplayerRedux.currentplayfileindex;
+  // let setCurrentplayfileindex = audioplayerRedux.setCurrentplayfileindex;
+  let episodesarr = audioplayerRedux.episodesarr;
+
+
 
     const audioRef =useRef();
     const [isPlaying,setIsPlaying] = useState(false);
@@ -41,6 +58,7 @@ function Audioplayer  ({audioSrc,image,currentplayfileindex,setCurrentplayfilein
    const handleVolume = (e)=>{
     setVolume(e.target.value);
     audioRef.current.volume=e.target.value;
+    // setDummy("52")
    }
 
    useEffect(()=>{
@@ -71,12 +89,13 @@ function Audioplayer  ({audioSrc,image,currentplayfileindex,setCurrentplayfilein
 
    const handleLoadedmetadata = ()=>{  //To find the total length of the audio file in secs
     setDuration(audioRef.current.duration);
-    console.log("duration set",audioRef.current.duration)
+    console.log("duration set",audioRef.current.duration,"now calling")
    }
 
    const handleEnded = ()=>{  //To know and update the audio play has been completed and change the play icon
      setCurrentTime(0);
      setIsPlaying(false);
+     console.log("The file is ended",currentplayfileindex,"currentplay file index");
    }
 
 useEffect(()=>{
@@ -123,29 +142,38 @@ useEffect(()=>{
    setIsMute(volume===0);
   },[volume])
 
+
   const prevsong = ()=>{
-    console.log(currentplayfileindex,"hi hello")
-    if(currentplayfileindex!==0) {
-    setCurrentplayfileindex(currentplayfileindex-1);
-    }
-  }
+    console.log(currentplayfileindex,"hi hello");
+          if(currentplayfileindex!==0) {
+             // setCurrentplayfileindex(currentplayfileindex-1);  
+             dispatch(
+              setsetNewindexInCurrentplayfileindex(currentplayfileindex-1)
+              );
+               console.log(currentplayfileindex-1);
+             }
+        }
+  
 
   const nextsong = ()=>{
-    console.log(currentplayfileindex,"56 hello")
+    console.log(currentplayfileindex,"currentplayfileindex")
     if(currentplayfileindex<episodesarr.length-1) {
-    setCurrentplayfileindex(currentplayfileindex+1);
+    // setCurrentplayfileindex(currentplayfileindex+1);
+    dispatch(
+      setsetNewindexInCurrentplayfileindex(currentplayfileindex+1)
+      );
     }
   }
 
   return (
     <div className='custom-audio-player'>
-     {console.log(episodesarr[currentplayfileindex],"Current file")}
+     {/* {console.log(episodesarr[currentplayfileindex],"Current file")} */}
       <div className='episodename'>
           {episodesarr[currentplayfileindex]?.title}
       </div>
       <div className='wrap-div'>
       <div className='player-control-btns'>
-        <img src={image} alt='thumbnail'className='display-image-plr'/>
+        <img src={image ? image : nopodcast} alt='thumbnail'className='display-image-plr'/>
         <audio ref={audioRef} src={audioSrc}/>      {/*By using "useRef" hook we are taking the reference of the element  */}
                                                 {/* And by using this we easily access the element for our manipulations */}
         <p className='audio-btn trackbtn' onClick={prevsong}><RxTrackPrevious/></p>                                        

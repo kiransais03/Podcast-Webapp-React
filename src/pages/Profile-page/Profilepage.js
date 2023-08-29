@@ -241,6 +241,7 @@ async function handledisplayimgupdate() {
       <Button onClick={handleLogout} text={loading ? "Signing Out...." : "Logout"}/>
       </div>
     </div>)}
+    <div style={{height:"72px"}}></div>
     </>
   )
 }

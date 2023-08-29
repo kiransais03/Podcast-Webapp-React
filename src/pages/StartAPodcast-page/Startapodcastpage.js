@@ -8,6 +8,7 @@ const Startapodcastpage=() =>{
             <h1>Create A Podcast</h1>
           <Createpodcastform/>
         </div>
+        <div style={{height:"72px"}}></div>
     </div>
   )
 }

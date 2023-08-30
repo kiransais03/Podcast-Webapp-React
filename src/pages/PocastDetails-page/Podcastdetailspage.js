@@ -12,7 +12,7 @@ import Audioplayer from '../../components/AudioPlayer/Audioplayer';
 import Genretag from '../../components/Common-Components/Genretag/Genretag';
 import Updatepodcastdata from '../../components/Updatepodcastdata/Updatepodcastdata';
 import Updateepisodedata from '../../components/UpdateEpisodedata/Updateepisodedata';
-import {setEpisodesarrredux,setPlayingFileredux,setCurrentplayfileindexredux, setImageredux, setsetNewindexInCurrentplayfileindex } from '../../slices/audioplayerSlices';
+import {setEpisodesarrredux,setPlayingFileredux,setCurrentplayfileindexredux, setImageredux, setsetNewindexInCurrentplayfileindex,setIspodcastdetailspageunmounted } from '../../slices/audioplayerSlices';
 
 const Podcastdetailspage = () => {
 
@@ -35,7 +35,13 @@ const Podcastdetailspage = () => {
   let navigate = useNavigate();
 // console.log(id,useParams());
 
+useEffect(()=>{
+  dispatch(setIspodcastdetailspageunmounted(false))
 
+  return ()=>{
+    dispatch(setIspodcastdetailspageunmounted(true));
+  }
+},[])
 
 useEffect(()=>{
   if(newindexInCurrentplayfileindex!=="")

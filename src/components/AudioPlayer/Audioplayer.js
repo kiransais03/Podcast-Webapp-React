@@ -21,7 +21,10 @@ function Audioplayer  ()  {
   // let setCurrentplayfileindex = audioplayerRedux.setCurrentplayfileindex;
   let episodesarr = audioplayerRedux.episodesarr;
 
+  let ispodcastdetailspageunmounted = audioplayerRedux.ispodcastdetailspageunmounted;
 
+
+console.log("Episodes array changing",episodesarr,ispodcastdetailspageunmounted)
 
     const audioRef =useRef();
     const [isPlaying,setIsPlaying] = useState(false);
@@ -96,6 +99,8 @@ function Audioplayer  ()  {
      setCurrentTime(0);
      setIsPlaying(false);
      console.log("The file is ended",currentplayfileindex,"currentplay file index");
+     toast.success("Podcast Ended");
+     setTimeout(()=>{nextsong();},1000) 
    }
 
 useEffect(()=>{
@@ -151,19 +156,20 @@ useEffect(()=>{
               setsetNewindexInCurrentplayfileindex(currentplayfileindex-1)
               );
                console.log(currentplayfileindex-1);
+               toast.success("Playing Previous Podcast");
              }
         }
   
 
   const nextsong = ()=>{
     console.log(currentplayfileindex,"currentplayfileindex")
-    if(currentplayfileindex<episodesarr.length-1) {
-    // setCurrentplayfileindex(currentplayfileindex+1);
-    dispatch(
-      setsetNewindexInCurrentplayfileindex(currentplayfileindex+1)
-      );
+    if(currentplayfileindex<episodesarr.length-1) 
+      {
+              // setCurrentplayfileindex(currentplayfileindex+1);
+              dispatch(setsetNewindexInCurrentplayfileindex(currentplayfileindex+1));
+              toast.success("Playing Next Podcast");
+      }
     }
-  }
 
   return (
     <div className='custom-audio-player'>

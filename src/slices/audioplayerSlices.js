@@ -29,9 +29,12 @@ const audioplayerSlices = createSlice({
     setsetNewindexInCurrentplayfileindex:(state,action)=>{
         state.setNewindexInCurrentplayfileindex=action.payload;
     },
+    setIspodcastdetailspageunmounted : (state,action)=>{
+        state.ispodcastdetailspageunmounted= action.payload;
+    }
    }
 })
 
 
-export const {setEpisodesarrredux,setPlayingFileredux,setImageredux,setCurrentplayfileindexredux,setsetNewindexInCurrentplayfileindex}=audioplayerSlices.actions;
+export const {setEpisodesarrredux,setPlayingFileredux,setImageredux,setCurrentplayfileindexredux,setsetNewindexInCurrentplayfileindex,setIspodcastdetailspageunmounted}=audioplayerSlices.actions;
 export default audioplayerSlices.reducer;

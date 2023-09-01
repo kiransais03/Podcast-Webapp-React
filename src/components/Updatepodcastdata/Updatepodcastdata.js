@@ -169,9 +169,9 @@ function Updatepodcastdata({currentpodcast,setDummystate}) {
         await deleteDoc(doc(db, "podcasts", currentpodcast.id));
         toast.success("Podcast Deleted Successfully");
         setLoading3(false);
-        // setTimeout(()=>{ navigate("/podcasts");},2000)
-        window.location.reload();
-       
+        let offcanvas_closebtn  =document.getElementsByClassName("btn-close")[0];
+        offcanvas_closebtn.click();
+        navigate("/podcasts");
        }
        catch(error) {
         setLoading3(false);
@@ -218,7 +218,9 @@ function Updatepodcastdata({currentpodcast,setDummystate}) {
 <div className="spinner-grow spinner-grow-sm" role="status">
   <span className="visually-hidden">Loading...</span>
 </div></div>:"Update Display Image"}</button>
+
 <br/>
+
 <button style={{margin:"20px 0"}} className='profilebtns btn btn-danger' onClick={deletepodcastfunc}>
       {loading3 ?<div><div className="spinner-border spinner-border-sm" role="status">
   <span className="visually-hidden">Loading...</span>

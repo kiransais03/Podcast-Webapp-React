@@ -14,8 +14,8 @@ const clickfunction = ()=>{
 
   return (
     <div style={{width:"100%"}}>
-      <h1 style={{textAlign:"left",marginBottom:"0",fontSize:"16px"}}>{title}</h1>
-      <p style={{marginLeft:"1rem"}} className='episode-description'>{description}</p>
+      <h1 style={{textAlign:"left",marginBottom:"0",fontSize:"16px",wordBreak:"break-all",}}>{title}</h1>
+      <p style={{marginLeft:"1rem",wordBreak:"break-all"}} className='episode-description'>{description}</p>
       <Button text={"Play"} width={"150px"} onClick={clickfunction} />
      {currentpodcast.createdBy===auth.currentUser.uid && <button style={{width:"100%",maxWidth:"150px",marginLeft:"15px"}} className="btn btn-outline-warning" type="button" data-bs-toggle="offcanvas" data-bs-target={`#${episodeid}b`} aria-controls={`${episodeid}b`}>
                    Edit Episode

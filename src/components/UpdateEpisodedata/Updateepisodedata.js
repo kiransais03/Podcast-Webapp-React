@@ -134,7 +134,7 @@ async function deleteepisodefunc() {
 
 <div className="offcanvas offcanvas-end" data-bs-backdrop="static" tabIndex="-1" id={`${episodeid}b`} data-bs-theme="dark" aria-labelledby={`${episodeid}b`}>
   <div className="offcanvas-header">
-    <h5 className="offcanvas-title" id="staticBackdropLabel">Edit Episode:{title} </h5>
+    <h5 className="offcanvas-title" id="staticBackdropLabel" style={{wordBreak:"break-all"}}>Edit Episode:{title} </h5>
     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div className="offcanvas-body">

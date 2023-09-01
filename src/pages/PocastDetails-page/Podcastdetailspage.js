@@ -84,9 +84,30 @@ catch(error) {
 }
 
 
+useEffect(()=>{
+  try {
+  console.log("running1")
+  const unsub = onSnapshot(doc(db, "podcasts",id,), (doc) => {
+    setCurrentpodcast({id:id,...doc.data()});
+    currpodData={id:id,...doc.data()};
+  });
+   console.log("Podcast updated successfully")
+
+   return ()=>{
+    unsub();  //Cleanup function to the realtime Firestore Db listener after the component unmounts.
+}
+  }
+
+catch(error) {
+  toast.error(`Some error occured ${error.message}`);
+}
+ 
+},[id])
+
+
 
 useEffect(()=>{
-  console.log("running")
+  console.log("running2")
 const unsubscribe = onSnapshot(query(collection(db, "podcasts",id,"episodes")), (querySnapshot) => {   //If any updates in Firestore db in episodes collection of files this function will be triggered
 const podcastEpisodeData = [];
 querySnapshot.forEach((doc) => {
@@ -154,7 +175,7 @@ useEffect(()=>{
       {currentpodcast.id && (
         <>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",width:"100%",margin:"1rem"}}>
-            <h1 className='currentpodcast-page-titles'>{currentpodcast.title}</h1>
+            <h1 className='currentpodcast-page-titles' style={{wordBreak:"break-all"}}>{currentpodcast.title}</h1>
             
             {currentpodcast.createdBy===auth.currentUser.uid && (
               <>
@@ -176,7 +197,7 @@ useEffect(()=>{
           <div className='current-podcast-bannerwrap'>
             <img src={currentpodcast.bannerimg} alt="banner"/>
           </div>
-          <p className='currentpodcast-description'>{currentpodcast.description}</p>
+          <p className='currentpodcast-description' style={{wordBreak:"break-all"}}>{currentpodcast.description}</p>
   
           <h1 className='currentpodcast-page-titles'>Episodes </h1>
           {/* <button style={{width:"100%",maxWidth:"200px"}} className="btn btn-outline-warning" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop2" aria-controls="staticBackdrop2 ">
@@ -209,7 +230,7 @@ useEffect(()=>{
  
  {/* //Offcanvas for Edit of Podcast */}
   
-  <Updatepodcastdata currentpodcast={currentpodcast} getData1={getData1} setDummystate={setDummystate}/>
+  <Updatepodcastdata currentpodcast={currentpodcast} getData1={getData1}/>
   
   </div>
   

@@ -8,7 +8,7 @@ import { auth, db, storage } from '../../firebase';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
 
-function Updatepodcastdata({currentpodcast,setDummystate}) {
+function Updatepodcastdata({currentpodcast}) {
     //Edit Podcast Data Functions
 
     //EditPodcast menu data states
@@ -18,6 +18,7 @@ function Updatepodcastdata({currentpodcast,setDummystate}) {
     const [genreedit,setGenreedit]=useState("");
     const [banneredit,setBanneredit]=useState("");
     const [displayedit,setDisplayedit]=useState("");
+    const [dummyCall,setDummyCall] = useState("")
 
     const [loading,setLoading] = useState(false);
     const [loading2,setLoading2] = useState(false);
@@ -47,7 +48,6 @@ function Updatepodcastdata({currentpodcast,setDummystate}) {
         });
        
         toast.success("Podcast data updated successfully")
-        setDummystate("dummycallfor-re-render");
         // print
     
       }
@@ -96,7 +96,7 @@ function Updatepodcastdata({currentpodcast,setDummystate}) {
       
       toast.success("Display Image Uploaded Successfully");
       setLoading(false);
-      setDummystate("dummycallfor-re-render")
+      // setDummystate("dummycallfor-re-render")
       
     }
     catch(error) {
@@ -142,7 +142,7 @@ function Updatepodcastdata({currentpodcast,setDummystate}) {
           toast.success("Display Image Uploaded Successfully");
           setLoading2(false);
           setDisplayedit("")
-          setDummystate("dummycallfor-re-render");
+          // setDummystate("dummycallfor-re-render");
           
         }
         catch(error) {
@@ -171,7 +171,7 @@ function Updatepodcastdata({currentpodcast,setDummystate}) {
         setLoading3(false);
         let offcanvas_closebtn  =document.getElementsByClassName("btn-close")[0];
         offcanvas_closebtn.click();
-        navigate("/podcasts");
+        setTimeout(()=>{navigate("/podcasts")},500);
        }
        catch(error) {
         setLoading3(false);
@@ -186,7 +186,7 @@ function Updatepodcastdata({currentpodcast,setDummystate}) {
 
 <div className="offcanvas offcanvas-start" data-bs-backdrop="static" tabIndex="-1" id="staticBackdrop1" data-bs-theme="dark" aria-labelledby="staticBackdropLabel">
   <div className="offcanvas-header">
-    <h5 className="offcanvas-title" id="staticBackdropLabel">Edit Podcast:{currentpodcast.title}</h5>
+    <h5 className="offcanvas-title" id="staticBackdropLabel" style={{wordBreak:"break-all"}}>Edit Podcast:{currentpodcast.title}</h5>
     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div className="offcanvas-body">
